@@ -1,0 +1,60 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<div class="page" Style="text-align:center">
+ <ul class="pagination" Style="margin:0px auto">
+ 
+ 
+    <%if (rowsPerPage<rowNumber) {%>
+    <%if(pageIndex>=rowsPerPage){%>
+      <li>  <A href="?whichPage=1"><span aria-hidden="true">&laquo;</span></A>&nbsp;</li>
+      <li>  <A href="?whichPage=<%=whichPage-1%>"><span aria-hidden="true">&lsaquo;</span></A>&nbsp;</li>
+    <%}%>
+   <%}%> 
+
+    <%if(pageNumber>1){
+    int i =0;
+    int showPage=2;//一次顯示前後幾筆頁數
+    if(whichPage<=showPage&&pageNumber>showPage){
+   	for(i =1 ;i<=showPage*2;i++){%>
+   	<li>   
+		    	<a href="?whichPage=<%=i%>">
+		    	<%=i%> 
+		    	</a>
+	</li>
+   	<%}%><%}%><%else if(pageNumber<=showPage){
+   	for(i =1;i<=pageNumber;i++){%>
+   	<li>   
+		    	<a href="?whichPage=<%=i%>">
+		    	<%=i%> 
+		    	</a>
+	</li>
+	<%}%><%}%><%else if(whichPage+showPage>rowNumber){
+   	for(i =whichPage-showPage ;i<=rowNumber;i++){%>
+   	<li>   
+		    	<a href="?whichPage=<%=i%>">
+		    	<%=i%> 
+		    	</a>
+	</li>
+	<%}%><%}%><%else{for(i =whichPage-showPage ;i<=whichPage+showPage;i++){%>  
+    		<li>   
+		    	<a href="?whichPage=<%=i%>">
+		    	<%=i%> 
+		    	</a>
+		    </li>
+		   
+	 <%}%><%}%><%}%>
+   	
+  
+
+	<%if (rowsPerPage<rowNumber) {%>
+    <%if(pageIndex<pageIndexArray[pageNumber-1]){%>
+      <li>  <A href="?whichPage=<%=whichPage+1%>"><span aria-hidden="true">&rsaquo;</span> </A>&nbsp;</li>
+      <li>  <A href="?whichPage=<%=pageNumber%>"><span aria-hidden="true">&raquo;</span></A>&nbsp;</li>
+    <%}%>
+   <%}%>
+
+	</ul>
+	
+</div>
+
+<br>
