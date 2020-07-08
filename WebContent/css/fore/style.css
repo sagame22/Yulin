@@ -3,7 +3,7 @@
 }
 
 body {
-	font-size: 12px;
+	font-size: 16px;
 	font-family: Arial;
 	min-width:1024px;
 /* 	width:1920px; */
@@ -15,7 +15,7 @@ a {
 
 a:hover {
 	text-decoration: none;
-	color: #C40000;
+	color: #CCC;
 }
 
 nav.top {
@@ -529,7 +529,7 @@ table.categorySortBarTable td.grayColumn {
 }
 
 table.categorySortBarTable td.priceMiddleColumn {
-	width: 10px;
+	width: 16px;
 	vertical-align: middle;
 	color: #CCCCCC;
 }
@@ -1979,6 +1979,7 @@ span.reviewProductInfoTableSellNumber {
 
 table.reviewProductInfoTable {
 	margin: 20px 10px;
+	font-size: 18px;
 }
 
 table.reviewProductInfoTable td {
@@ -2273,5 +2274,5 @@ table.cartProductTable th.selectAndImage{
 }
 
 table td{
-	font-size:12px;	
+	font-size:16px;	
 }

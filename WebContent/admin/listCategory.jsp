@@ -35,7 +35,7 @@ $(function(){
 	<div class="listDataTableDiv">
 		<table class="table table-striped table-bordered table-hover  table-condensed">
 			<thead>
-				<tr class="success">
+				<tr class="bg-primary">
 					<th>ID</th>
 					<th>圖片</th>
 					<th>分類名稱</th>

@@ -15,7 +15,7 @@
     int i =0;
     int showPage=2;//一次顯示前後幾筆頁數
     if(whichPage<=showPage&&pageNumber>showPage){
-   	for(i =1 ;i<=showPage*2;i++){%>
+   	for(i =1 ;i<=(showPage*2-1);i++){%>
    	<li>   
 		    	<a href="?whichPage=<%=i%>">
 		    	<%=i%> 
@@ -28,7 +28,7 @@
 		    	<%=i%> 
 		    	</a>
 	</li>
-	<%}%><%}%><%else if(whichPage+showPage>pageNumber){
+	<%}%><%}%><%else if(whichPage+showPage>=pageNumber){
    	for(i =whichPage-showPage ;i<=pageNumber;i++){%>
    	<li>   
 		    	<a href="?whichPage=<%=i%>">

@@ -70,9 +70,9 @@ $(function(){
 				  </div>			  
 			  	<table class="table table-striped table-bordered table-hover  table-condensed"> 
 					<thead>
-						<tr class="success">
+						<tr class="bg-primary">
 							<th>ID</th>
-							<th>產品單個圖片請縮圖</th>
+							<th style="text-align:center;">產品單個圖片請縮圖</th>
 							<th>删除</th>
 						</tr>
 					</thead>
@@ -124,9 +124,9 @@ $(function(){
 				  </div>
 				  <table class="table table-striped table-bordered table-hover  table-condensed"> 
 						<thead>
-							<tr class="success">
+							<tr class="bg-primary">
 								<th>ID</th>
-								<th>產品詳情圖片請縮圖</th>
+								<th style="text-align:center;">產品詳情圖片請縮圖</th>
 								<th>删除</th>
 							</tr>
 						</thead>

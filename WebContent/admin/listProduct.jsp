@@ -44,12 +44,12 @@
 		<table
 			class="table table-striped table-bordered table-hover  table-condensed">
 			<thead>
-				<tr class="success">
+				<tr class="bg-primary">
 					<th>ID</th>
 					<th>圖片</th>
 					<th>產品名稱</th>
 					<th>產品小標題</th>
-					<th width="63px">原價格</th>
+					<th width="80px">原價格</th>
 					<th width="80px">優惠價格</th>
 					<th width="80px">庫存數量</th>
 					<th width="80px">圖片管理</th>

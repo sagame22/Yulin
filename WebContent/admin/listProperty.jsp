@@ -38,7 +38,7 @@
 		<table
 			class="table table-striped table-bordered table-hover  table-condensed">
 			<thead>
-				<tr class="success">
+				<tr class="bg-primary">
 					<th>ID</th>
 					<th>屬性名稱</th>
 					<th>編輯</th>
