@@ -28,8 +28,8 @@
 		    	<%=i%> 
 		    	</a>
 	</li>
-	<%}%><%}%><%else if(whichPage+showPage>rowNumber){
-   	for(i =whichPage-showPage ;i<=rowNumber;i++){%>
+	<%}%><%}%><%else if(whichPage+showPage>pageNumber){
+   	for(i =whichPage-showPage ;i<=pageNumber;i++){%>
    	<li>   
 		    	<a href="?whichPage=<%=i%>">
 		    	<%=i%> 

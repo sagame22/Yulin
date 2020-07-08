@@ -7,9 +7,8 @@
 <%@ page import="com.category.model.*"%>
 <%@ page import="com.property.model.*"%>
 <%
-	PropertyDAOImpl Cpservice = new PropertyDAOImpl();
-    List<PropertyVO> list = (List<PropertyVO>)request.getAttribute("ps");
-    pageContext.setAttribute("list",list);
+	PropertyDAOImpl pt = new PropertyDAOImpl();
+    List<PropertyVO> list = (List<PropertyVO>)request.getSession().getAttribute("ps");
 %>
 <script>
 	$(function() {

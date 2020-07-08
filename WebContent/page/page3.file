@@ -1,0 +1,40 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<%  int rowsPerPage2 = 2;  //每頁的筆數    
+    int rowNumber2=0;      //總筆數
+    int pageNumber2=0;     //總頁數      
+    int whichPage2=1;      //第幾頁
+    int pageIndexArray2[]=null;
+    int pageIndex2=0; 
+%>
+
+<%  
+    rowNumber2=list2.size();
+    if (rowNumber2%rowsPerPage2 !=0)
+         pageNumber2=rowNumber2/rowsPerPage2 + 1;
+    else pageNumber2=rowNumber2/rowsPerPage2;    
+
+    pageIndexArray2=new int[pageNumber2]; 
+    for (int i=1 ; i<=pageIndexArray2.length ; i++)
+         pageIndexArray2[i-1]=i*rowsPerPage2-rowsPerPage2;
+%>
+
+<%  try {
+       whichPage2 = Integer.parseInt(request.getParameter("whichPage2"));
+       pageIndex2=pageIndexArray2[whichPage2-1];
+    } catch (NumberFormatException e) { //第一次執行的時候
+       whichPage2=1;
+       pageIndex2=0;
+    } catch (ArrayIndexOutOfBoundsException e) { //總頁數之外的錯誤頁數
+         if (pageNumber2>0){
+              whichPage2=pageNumber2;
+              pageIndex2=pageIndexArray2[pageNumber2-1];
+         }
+    } 
+%>
+
+<%if (pageNumber2>0){%>
+  <b><font color=red>第<%=whichPage2%>/<%=pageNumber2%>頁</font></b>
+<%}%>
+
+<b>●共<font color=red><%=rowNumber2%></font>筆</b>

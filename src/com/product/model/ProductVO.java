@@ -7,8 +7,11 @@ import java.util.Date;
 
 import java.util.List;
  
-public class ProductVO {
-    private String name;
+public class ProductVO implements java.io.Serializable{
+    
+	private static final long serialVersionUID = 1L;
+	
+	private String name;
     private String subTitle;
     private Double orignalPrice;
     private Double promotePrice;

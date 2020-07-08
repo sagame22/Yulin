@@ -5,7 +5,7 @@ import com.product.model.ProductVO;
 public class ProductImageVO {
 
     private String type;
-    private ProductVO productVO;
+    private ProductVO product;
     private int imageId;
  
     public int getImageId() {
@@ -22,10 +22,10 @@ public class ProductImageVO {
     public void setType(String type) {
         this.type = type;
     }
-    public ProductVO getproductVO() {
-        return productVO;
+    public ProductVO getProduct() {
+        return product;
     }
-    public void setproductVO(ProductVO productVO) {
-        this.productVO = productVO;
+    public void setProduct(ProductVO productVO) {
+        this.product = productVO;
     }
 }

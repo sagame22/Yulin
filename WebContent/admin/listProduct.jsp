@@ -7,8 +7,7 @@
 <%@ page import="com.product.model.*"%>
 <%
 	ProductDAOImpl pt = new ProductDAOImpl();
-    List<ProductVO> list = pt.list(Integer.parseInt(request.getParameter("cid")));
-    pageContext.setAttribute("list",list);
+    List<ProductVO> list = (List<ProductVO>)request.getSession().getAttribute("ps2");
 %>
 <script>
 	$(function() {
@@ -61,13 +60,13 @@
 			</thead>
 			<tbody>
 <%@ include file="/page/page1.file" %>
-				<c:forEach items="${ps}" var="p">
+				<c:forEach items="${ps2}" var="p" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 					<tr>
 						<td>${p.productId}</td>
 						<td>
 						
 						<c:if test="${!empty p.firstProductImage}">
-							<img width="40px" src="img/productSingle/${p.firstProductImage.id}.jpg">
+							<img width="40px" src="img/productSingle/${p.firstProductImage.imageId}.jpg">
 						</c:if>
 						
 						</td>

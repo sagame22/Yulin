@@ -3,7 +3,6 @@ package com.servlet;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -75,14 +74,14 @@ public class PropertyServlet extends BaseBackServlet {
 
 	
 	public String list(HttpServletRequest request, HttpServletResponse response) {
-		int cid = Integer.parseInt(request.getParameter("cid"));
+		String scid = request.getParameter("cid");
+		if(scid!=null) {
+		int cid = Integer.parseInt(scid);
 		CategoryVO c = categoryDAOImpl.get(cid);
 		List<PropertyVO> ps = propertyDAOImpl.list(cid);
-		request.setAttribute("ps", ps);
+		request.getSession().setAttribute("ps", ps);
 		request.setAttribute("c", c);
-		
-		
-		
+		}
 		return "admin/listProperty.jsp";
 	}
 

@@ -7,11 +7,10 @@ import com.product.model.ProductVO;
 public interface ProductImageDAO {
 
 	public int getTotal();
-	public void add(ProductImageVO bean);
+	public int add(ProductImageVO bean);
 	public void update(ProductImageVO bean);
 	public void delete(int id);
 	public ProductImageVO get(int id);
 	public List<ProductImageVO> list(ProductVO p, String type);
-	public List<ProductImageVO> list(ProductVO p, String type, int start, int count);
 	
 }

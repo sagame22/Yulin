@@ -125,12 +125,15 @@ public class ProductServlet extends BaseBackServlet {
 
 	
 	public String list(HttpServletRequest request, HttpServletResponse response) {
-		int cid = Integer.parseInt(request.getParameter("cid"));
+		String scid = request.getParameter("cid");
+		
+		if(scid!=null) {
+		int cid = Integer.parseInt(scid);
 		CategoryVO c = categoryDAOImpl.get(cid);
 		List<ProductVO> ps = productDAOImpl.list(cid);
-		request.setAttribute("ps", ps);
+		request.getSession().setAttribute("ps2", ps);
 		request.setAttribute("c", c);
-		
+		}
 		return "admin/listProduct.jsp";
 	}
 }
