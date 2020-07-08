@@ -13,7 +13,6 @@ public interface PropertyValueDAO {
 	public PropertyValueVO get(int id);
 	public PropertyValueVO get(int ptid, int pid );
 	public List<PropertyValueVO> list();
-	public List<PropertyValueVO> list(int start, int count);
 	public void init(ProductVO p);
 	public List<PropertyValueVO> list(int pid);
 	

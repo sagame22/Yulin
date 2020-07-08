@@ -14,7 +14,7 @@
 		$("#addForm").submit(function() {
 			if (!checkEmpty("name", "產品名稱"))
 				return false;
-// 			if (!checkEmpty("subTitle", "小标题"))
+// 			if (!checkEmpty("subTitle", "小標"))
 // 				return false;
 			if (!checkNumber("orignalPrice", "原價格"))
 				return false;

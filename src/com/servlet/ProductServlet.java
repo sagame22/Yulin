@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.category.model.CategoryVO;
 import com.product.model.ProductVO;
-import com.property.model.PropertyVO;
 import com.propertyvalue.model.PropertyValueVO;
 
 @WebServlet("/productServlet")
@@ -71,7 +70,6 @@ public class ProductServlet extends BaseBackServlet {
 		ProductVO p = productDAOImpl.get(id);
 		request.setAttribute("p", p);
 		
-		List<PropertyVO> pts= propertyDAOImpl.list(p.getCategory().getCategoryId());
 		propertyValueDAOImpl.init(p);
 		
 		List<PropertyValueVO> pvs = propertyValueDAOImpl.list(p.getProductId());

@@ -17,16 +17,16 @@ public class PropertyValueDAOImpl implements PropertyValueDAO {
 	private static final String GET_TOTAL = "select count(*) from PropertyValue";
 	private static final String ADD_STMT = "insert into PropertyValue values(PROPERTYVALID_SEQ.nextval,?,?,?)";
 	private static final String UPATE_STMT = "update PropertyValue set pid= ?, ptid=?, value=?  where propertyvalID = ?";
-	private static final String DEL_STMT = "delete from PropertyValue where propertyvalID = ";
+	private static final String DEL_STMT = "delete from PropertyValue where propertyvalID = ?";
 	private static final String GET_ONE = "select * from PropertyValue where propertyvalID = ?";
 	private static final String GET_BY_PID$PTID = "select * from PropertyValue where ptid = ? and pid = ?";
-	private static final String GET_ALL = "select * from PropertyValue order by propertyvalID desc limit ?,? ";
+	private static final String GET_ALL = "select * from PropertyValue order by propertyvalID desc ";
 	private static final String GET_ALL2 ="select * from PropertyValue where pid = ? order by ptid desc";
 	
 	
 	public int getTotal() {
         int total = 0;
-        try (Connection c = JDBCUtilites.getConnection();
+        try (Connection c = JDBCUtilites.getConnectionJNDI();
         		PreparedStatement ps = c.prepareStatement(GET_TOTAL);
         	) 
         	{
@@ -44,7 +44,7 @@ public class PropertyValueDAOImpl implements PropertyValueDAO {
   
     public void add(PropertyValueVO bean) {
  
-        try (Connection c = JDBCUtilites.getConnection();
+        try (Connection c = JDBCUtilites.getConnectionJNDI();
         	 PreparedStatement ps = c.prepareStatement(ADD_STMT);
         	) 
         	{
@@ -62,7 +62,7 @@ public class PropertyValueDAOImpl implements PropertyValueDAO {
   
     public void update(PropertyValueVO bean) {
  
-        try (Connection c = JDBCUtilites.getConnection();
+        try (Connection c = JDBCUtilites.getConnectionJNDI();
         	PreparedStatement ps = c.prepareStatement(UPATE_STMT);
         	) 
         	{
@@ -81,7 +81,7 @@ public class PropertyValueDAOImpl implements PropertyValueDAO {
   
     public void delete(int id) {
   
-        try (Connection c = JDBCUtilites.getConnection();
+        try (Connection c = JDBCUtilites.getConnectionJNDI();
         	PreparedStatement ps = c.prepareStatement(DEL_STMT);
         	) 
         	{
@@ -97,7 +97,7 @@ public class PropertyValueDAOImpl implements PropertyValueDAO {
     public PropertyValueVO get(int id) {
         PropertyValueVO bean = new PropertyValueVO();
   
-        try (Connection c = JDBCUtilites.getConnection();
+        try (Connection c = JDBCUtilites.getConnectionJNDI();
         	PreparedStatement ps = c.prepareStatement(GET_ONE);
         	) 
         	{
@@ -126,7 +126,7 @@ public class PropertyValueDAOImpl implements PropertyValueDAO {
     public PropertyValueVO get(int ptid, int pid ) {
         PropertyValueVO bean = null;
          
-        try (Connection c = JDBCUtilites.getConnection();
+        try (Connection c = JDBCUtilites.getConnectionJNDI();
         	 PreparedStatement ps = c.prepareStatement(GET_BY_PID$PTID);
         	) 
         	{
@@ -154,19 +154,15 @@ public class PropertyValueDAOImpl implements PropertyValueDAO {
         return bean;
     }
   
+
     public List<PropertyValueVO> list() {
-        return list(0, Short.MAX_VALUE);
-    }
-  
-    public List<PropertyValueVO> list(int start, int count) {
         List<PropertyValueVO> beans = new ArrayList<PropertyValueVO>();
   
-        try (Connection c = JDBCUtilites.getConnection();
+        try (Connection c = JDBCUtilites.getConnectionJNDI();
         	 PreparedStatement ps = c.prepareStatement(GET_ALL);
         	) 
         	{
-            ps.setInt(1, start);
-            ps.setInt(2, count);
+            
   
             ResultSet rs = ps.executeQuery();
   
@@ -209,7 +205,7 @@ public class PropertyValueDAOImpl implements PropertyValueDAO {
     public List<PropertyValueVO> list(int pid) {
         List<PropertyValueVO> beans = new ArrayList<PropertyValueVO>();
          
-        try (Connection c = JDBCUtilites.getConnection();
+        try (Connection c = JDBCUtilites.getConnectionJNDI();
         	 PreparedStatement ps = c.prepareStatement(GET_ALL2);
         	) 
         	{
