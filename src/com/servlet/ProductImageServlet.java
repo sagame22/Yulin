@@ -111,7 +111,7 @@ public class ProductImageServlet extends BaseBackServlet {
 		List<ProductImageVO> pisSingle = productImageDAOImpl.list(p, ProductImageDAOImpl.type_single);
 		List<ProductImageVO> pisDetail = productImageDAOImpl.list(p, ProductImageDAOImpl.type_detail);
 
-		request.setAttribute("p", p);
+		request.getSession().setAttribute("p", p);
 		request.getSession().setAttribute("pisSingle", pisSingle);
 		request.getSession().setAttribute("pisDetail", pisDetail);
 		}

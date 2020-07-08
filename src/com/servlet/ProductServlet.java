@@ -132,7 +132,7 @@ public class ProductServlet extends BaseBackServlet {
 		CategoryVO c = categoryDAOImpl.get(cid);
 		List<ProductVO> ps = productDAOImpl.list(cid);
 		request.getSession().setAttribute("ps2", ps);
-		request.setAttribute("c", c);
+		request.getSession().setAttribute("c", c);
 		}
 		return "admin/listProduct.jsp";
 	}

@@ -80,7 +80,7 @@ public class PropertyServlet extends BaseBackServlet {
 		CategoryVO c = categoryDAOImpl.get(cid);
 		List<PropertyVO> ps = propertyDAOImpl.list(cid);
 		request.getSession().setAttribute("ps", ps);
-		request.setAttribute("c", c);
+		request.getSession().setAttribute("c", c);
 		}
 		return "admin/listProperty.jsp";
 	}
