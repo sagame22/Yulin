@@ -10,8 +10,8 @@ import java.util.List;
 public class ProductVO {
     private String name;
     private String subTitle;
-    private float orignalPrice;
-    private float promotePrice;
+    private Double orignalPrice;
+    private Double promotePrice;
     private int stock;
     private Date createDate;
     private CategoryVO categoryVO;
@@ -35,16 +35,16 @@ public class ProductVO {
     public void setSubTitle(String subTitle) {
         this.subTitle = subTitle;
     }
-    public float getOrignalPrice() {
+    public Double getOrignalPrice() {
         return orignalPrice;
     }
-    public void setOrignalPrice(float orignalPrice) {
+    public void setOrignalPrice(Double orignalPrice) {
         this.orignalPrice = orignalPrice;
     }
-    public float getPromotePrice() {
+    public Double getPromotePrice() {
         return promotePrice;
     }
-    public void setPromotePrice(float promotePrice) {
+    public void setPromotePrice(Double promotePrice) {
         this.promotePrice = promotePrice;
     }
     public int getStock() {

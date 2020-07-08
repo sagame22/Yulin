@@ -14,20 +14,20 @@ import com.productimage.model.ProductImageVO;
 import com.review.model.ReviewDAOImpl;
 import com.uti.tool.JDBCUtilites;
 
-public class ProductDAOImpl {
+public class ProductDAOImpl implements ProductDAO {
 	
 	private static final String GET_TOTAL = "select count(*) from Product where cid = ";
 	private static final String ADD_STMT = "insert into Product values(PRODUCTID_SEQ.nextval,?,?,?,?,?,?,?)";
 	private static final String UPATE_STMT = "update Product set name= ?, subTitle=?, orignalPrice=?,promotePrice=?,stock=?, cid = ?, createDate=? where PRODUCTID = ?";
-	private static final String DEL_STMT = "delete from Product where Productid = ";
-	private static final String GET_ONE = "select * from Product where Productid = ";
-	private static final String GET_ALL = "select * from Product where cid = ? order by Productid desc limit ?,? ";
-	private static final String GET_ALL2 = "select * from Product limit ?,? ";
-	private static final String SEARCH = "select * from Product where name like ? limit ?,? ";
+	private static final String DEL_STMT = "delete from Product where Productid = ?";
+	private static final String GET_ONE = "select * from Product where Productid = ?";
+	private static final String GET_ALL = "select * from Product where cid = ? order by rownum desc ";
+	private static final String GET_ALL2 = "select * from Product ";
+	private static final String SEARCH = "select * from Product where name like ?  ";
 	
 	 public int getTotal(int cid) {
 	        int total = 0;
-	        try (Connection c = JDBCUtilites.getConnection();
+	        try (Connection c = JDBCUtilites.getConnectionJNDI();
 	        		PreparedStatement ps = c.prepareStatement(GET_TOTAL);
 	            ) 
 	        	{
@@ -43,39 +43,44 @@ public class ProductDAOImpl {
 	        return total;
 	    }
 	  
-	    public void add(ProductVO bean) {
-	 
-	        try (Connection c = JDBCUtilites.getConnection();
-	        	 PreparedStatement ps = c.prepareStatement(ADD_STMT);
+	    public int add(ProductVO bean) {
+	    	int []cols = {1};
+	        try (Connection c = JDBCUtilites.getConnectionJNDI();
+	        	 PreparedStatement ps = c.prepareStatement(ADD_STMT,cols);
 	        	 ) 
 	        	 {
 	  
 	            ps.setString(1, bean.getName());
 	            ps.setString(2, bean.getSubTitle());
-	            ps.setFloat(3, bean.getOrignalPrice());
-	            ps.setFloat(4, bean.getPromotePrice());
+	            ps.setDouble(3, bean.getOrignalPrice());
+	            ps.setDouble(4, bean.getPromotePrice());
 	            ps.setInt(5, bean.getStock());
 	            ps.setInt(6, bean.getCategory().getCategoryId());
 	            ps.setDate(7, JDBCUtilites.u2s(bean.getCreateDate()));
 	            ps.execute();
-	  
+	            
+	            ResultSet rs = ps.getGeneratedKeys();
+	            if(rs.next()) {
+	        		int key = rs.getInt(1);
+	        		return key;
+	        	}
 	        } catch (Exception e) {
 	  
 	            e.printStackTrace();
-	        }
+	        }		return 0;
 	    }
 	  
 	    public void update(ProductVO bean) {
 	 
-	        try (Connection c = JDBCUtilites.getConnection();
+	        try (Connection c = JDBCUtilites.getConnectionJNDI();
 	        	 PreparedStatement ps = c.prepareStatement(UPATE_STMT);
 	        	 ) 
 	        	{
 	 
 	            ps.setString(1, bean.getName());
 	            ps.setString(2, bean.getSubTitle());
-	            ps.setFloat(3, bean.getOrignalPrice());
-	            ps.setFloat(4, bean.getPromotePrice());
+	            ps.setDouble(3, bean.getOrignalPrice());
+	            ps.setDouble(4, bean.getPromotePrice());
 	            ps.setInt(5, bean.getStock());
 	            ps.setInt(6, bean.getCategory().getCategoryId());
 	            ps.setDate(7, JDBCUtilites.u2s(bean.getCreateDate()));
@@ -91,7 +96,7 @@ public class ProductDAOImpl {
 	  
 	    public void delete(int id) {
 	  
-	        try (Connection c = JDBCUtilites.getConnection();
+	        try (Connection c = JDBCUtilites.getConnectionJNDI();
 	        	 PreparedStatement ps = c.prepareStatement(DEL_STMT);
 	        	)
 	        	{
@@ -107,20 +112,20 @@ public class ProductDAOImpl {
 	    public ProductVO get(int id) {
 	        ProductVO bean = new ProductVO();
 	  
-	        try (Connection c = JDBCUtilites.getConnection();
-	        		 PreparedStatement ps = c.prepareStatement(GET_ONE);
+	        try (Connection c = JDBCUtilites.getConnectionJNDI();
+	        	 PreparedStatement ps = c.prepareStatement(GET_ONE);
 	        	) 
 	        	{
 	        	ps.setInt(1,id);
 	  
-	            ResultSet rs = ps.executeQuery(GET_ONE);
+	            ResultSet rs = ps.executeQuery();
 	  
 	            if (rs.next()) {
 	 
 	                String name = rs.getString("name");
 	                String subTitle = rs.getString("subTitle");
-	                float orignalPrice = rs.getFloat("orignalPrice");
-	                float promotePrice = rs.getFloat("promotePrice");
+	                Double orignalPrice = rs.getDouble("orignalPrice");
+	                Double promotePrice = rs.getDouble("promotePrice");
 	                int stock = rs.getInt("stock");
 	                int cid = rs.getInt("cid");
 	                Date createDate = JDBCUtilites.s2u( rs.getDate("createDate"));
@@ -144,21 +149,17 @@ public class ProductDAOImpl {
 	        return bean;
 	    }
 	  
-	    public List<ProductVO> list(int cid) {
-	        return list(cid,0, Short.MAX_VALUE);
-	    }
+
 	  
-	    public List<ProductVO> list(int cid, int start, int count) {
+	    public List<ProductVO> list(int cid) {
 	        List<ProductVO> beans = new ArrayList<ProductVO>();
 	        CategoryVO category = new CategoryDAOImpl().get(cid);
 	  
-	        try (Connection c = JDBCUtilites.getConnection();
+	        try (Connection c = JDBCUtilites.getConnectionJNDI();
 	        	 PreparedStatement ps = c.prepareStatement(GET_ALL);
 	            ) 
 	        	{
 	            ps.setInt(1, cid);
-	            ps.setInt(2, start);
-	            ps.setInt(3, count);
 	  
 	            ResultSet rs = ps.executeQuery();
 	  
@@ -167,8 +168,8 @@ public class ProductDAOImpl {
 	                int id = rs.getInt(1);
 	                String name = rs.getString("name");
 	                String subTitle = rs.getString("subTitle");
-	                float orignalPrice = rs.getFloat("orignalPrice");
-	                float promotePrice = rs.getFloat("promotePrice");
+	                Double orignalPrice = rs.getDouble("orignalPrice");
+	                Double promotePrice = rs.getDouble("promotePrice");
 	                int stock = rs.getInt("stock");
 	                Date createDate = JDBCUtilites.s2u( rs.getDate("createDate"));
 	 
@@ -189,20 +190,17 @@ public class ProductDAOImpl {
 	        }
 	        return beans;
 	    }
+
+	    
 	    public List<ProductVO> list() {
-	        return list(0,Short.MAX_VALUE);
-	    }
-	    public List<ProductVO> list(int start, int count) {
 	        List<ProductVO> beans = new ArrayList<ProductVO>();
 	 
-	        try (Connection c = JDBCUtilites.getConnection();
+	        try (Connection c = JDBCUtilites.getConnectionJNDI();
 	        	 PreparedStatement ps = c.prepareStatement(GET_ALL2);
 	        	) 
 	        	{
 	 
-	            ps.setInt(1, start);
-	            ps.setInt(2, count);
-	  
+	       
 	            ResultSet rs = ps.executeQuery();
 	  
 	            while (rs.next()) {
@@ -211,8 +209,8 @@ public class ProductDAOImpl {
 	                int cid = rs.getInt("cid");
 	                String name = rs.getString("name");
 	                String subTitle = rs.getString("subTitle");
-	                float orignalPrice = rs.getFloat("orignalPrice");
-	                float promotePrice = rs.getFloat("promotePrice");
+	                Double orignalPrice = rs.getDouble("orignalPrice");
+	                Double promotePrice = rs.getDouble("promotePrice");
 	                int stock = rs.getInt("stock");
 	                Date createDate = JDBCUtilites.s2u( rs.getDate("createDate"));
 	 
@@ -280,19 +278,18 @@ public class ProductDAOImpl {
 	        }
 	    }
 	 
-	    public List<ProductVO> search(String keyword, int start, int count) {
+	    public List<ProductVO> search(String keyword) {
 	         List<ProductVO> beans = new ArrayList<ProductVO>();
 	          
 	         if(null==keyword||0==keyword.trim().length())
 	             return beans;
 	      
-	            try (Connection c = JDBCUtilites.getConnection();
+	            try (Connection c = JDBCUtilites.getConnectionJNDI();
 	            	 PreparedStatement ps = c.prepareStatement(SEARCH);
 	            	) 
 	            	{
 	                ps.setString(1, "%"+keyword.trim()+"%");
-	                ps.setInt(2, start);
-	                ps.setInt(3, count);
+	               
 	      
 	                ResultSet rs = ps.executeQuery();
 	      
@@ -302,8 +299,8 @@ public class ProductDAOImpl {
 	                    int cid = rs.getInt("cid");
 	                    String name = rs.getString("name");
 	                    String subTitle = rs.getString("subTitle");
-	                    float orignalPrice = rs.getFloat("orignalPrice");
-	                    float promotePrice = rs.getFloat("promotePrice");
+	                    Double orignalPrice = rs.getDouble("orignalPrice");
+	                    Double promotePrice = rs.getDouble("promotePrice");
 	                    int stock = rs.getInt("stock");
 	                    Date createDate = JDBCUtilites.s2u( rs.getDate("createDate"));
 	 

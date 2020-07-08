@@ -40,7 +40,7 @@ $(function(){
 					<th>圖片</th>
 					<th>分類名稱</th>
  					<th>屬性管理</th> 
-<!-- 					<th>產品管理</th> -->
+ 					<th>產品管理</th> 
 					<th>編輯</th>
 					<th>刪除</th>
 				</tr>
@@ -55,9 +55,9 @@ $(function(){
 					<td>${c.name}</td>
 					 	
  					<td><a href="admin_property_list?cid=${c.categoryId}"><span class="glyphicon glyphicon-th-list"></span></a></td>					 
+					<td><a href="admin_product_list?cid=${c.categoryId}"><span class="glyphicon glyphicon-shopping-cart"></span></a></td>					  
 					<td><a href="admin_category_edit?categoryId=${c.categoryId}"><span class="glyphicon glyphicon-edit"></span></a></td>
 					<td><a deleteLink="true" href="admin_category_delete?categoryId=${c.categoryId}"><span class=" 	glyphicon glyphicon-trash"></span></a></td>
- <!--					<td><a href="admin_product_list?cid=${c.categoryId}"><span class="glyphicon glyphicon-shopping-cart"></span></a></td>					  --> 
 	
 				</tr>
 				</c:forEach>
