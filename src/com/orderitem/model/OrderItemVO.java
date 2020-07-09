@@ -4,7 +4,7 @@ import com.member.model.MemberVO;
 import com.order.model.OrderVO;
 import com.product.model.ProductVO;
 
-public class OrderItemVO {
+public class OrderItemVO implements java.io.Serializable {
 
 	   private int number;
 	    private ProductVO product;

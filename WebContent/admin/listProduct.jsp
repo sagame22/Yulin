@@ -6,7 +6,7 @@
 <%@include file="../include/admin/adminNavigator.jsp"%>
 <%@ page import="com.product.model.*"%>
 <%
-	ProductDAOImpl pt = new ProductDAOImpl();
+
     List<ProductVO> list = (List<ProductVO>)request.getSession().getAttribute("ps2");
 %>
 <script>
@@ -84,7 +84,7 @@
 								class="glyphicon glyphicon-edit"></span></a></td>
 						<td><a deleteLink="true"
 							href="admin_product_delete?id=${p.productId}"><span
-								class=" 	glyphicon glyphicon-trash"></span></a></td>
+								class="glyphicon glyphicon-trash"></span></a></td>
 
 					</tr>
 				</c:forEach>

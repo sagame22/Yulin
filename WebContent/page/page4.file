@@ -13,7 +13,7 @@
 
     <%if(pageNumber2>1){
     int i =0;
-    int showPage2=2;//一次顯示前後幾筆頁數
+    int showPage2=1;//一次顯示前後幾筆頁數
     if(whichPage2<=showPage2&&pageNumber2>showPage2){
    	for(i =1 ;i<=showPage2*2-1;i++){%>
    	<li>   
@@ -47,7 +47,7 @@
   
 
 	<%if (rowsPerPage2<rowNumber2) {%>
-    <%if(pageIndex2<pageIndexArray[pageNumber2-1]){%>
+    <%if(pageIndex2<pageIndexArray[(pageNumber2)-1]){%>
       <li>  <A href="?whichPage2=<%=whichPage2+1%>"><span aria-hidden="true">&rsaquo;</span> </A>&nbsp;</li>
       <li>  <A href="?whichPage2=<%=pageNumber2%>"><span aria-hidden="true">&raquo;</span></A>&nbsp;</li>
     <%}%>

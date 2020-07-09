@@ -3,7 +3,7 @@ package com.propertyvalue.model;
 import com.product.model.ProductVO;
 import com.property.model.PropertyVO;
 
-public class PropertyValueVO {
+public class PropertyValueVO implements java.io.Serializable{
 
 	 private String value;
 	    private ProductVO productVO;

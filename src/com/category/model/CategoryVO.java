@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.product.model.ProductVO;
 
-public class CategoryVO {
+public class CategoryVO implements java.io.Serializable {
  
     private String name;
     private int categoryId;

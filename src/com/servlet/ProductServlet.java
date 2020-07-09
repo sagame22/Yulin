@@ -51,7 +51,6 @@ public class ProductServlet extends BaseBackServlet {
 	
 	public String delete(HttpServletRequest request, HttpServletResponse response) {
 		int id = Integer.parseInt(request.getParameter("id"));
-		System.out.println(id);
 		ProductVO p = productDAOImpl.get(id);
 		productDAOImpl.delete(id);
 		return "@admin_product_list?cid="+p.getCategory().getCategoryId();
@@ -115,7 +114,7 @@ public class ProductServlet extends BaseBackServlet {
 		p.setStock(stock);
 		p.setProductId(id);
 		p.setCategory(c);		
-
+		p.setCreateDate(new Date());
 		productDAOImpl.update(p);
 		
 		return "@admin_product_list?cid="+p.getCategory().getCategoryId();

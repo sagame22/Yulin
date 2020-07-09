@@ -100,6 +100,7 @@ public class ProductDAOImpl implements ProductDAO {
 	        	 PreparedStatement ps = c.prepareStatement(DEL_STMT);
 	        	)
 	        	{
+	        	System.out.println("hohihih");
 	        	ps.setInt(1, id);
 	            ps.execute();
 	  

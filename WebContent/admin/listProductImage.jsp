@@ -7,7 +7,6 @@
 <%@ page import="com.productimage.model.*"%>
 <%@ page import="com.product.model.*"%>
 <%
-	ProductImageDAOImpl pti = new ProductImageDAOImpl();
     List<ProductImageVO> list = (List)request.getSession().getAttribute("pisSingle");
     List<ProductImageVO> list2 = (List)request.getSession().getAttribute("pisDetail");
 %>
@@ -132,7 +131,7 @@ $(function(){
 						</thead>
 						<tbody>
 <%@ include file="/page/page3.file" %>
-							<c:forEach items="${pisDetail}" var="pi" begin="<%=pageIndex2%>" end="<%=pageIndex2+rowsPerPage2-1%>">
+							<c:forEach items="${pisDetail}" var="pi" begin="<%=pageIndex2%>" end="<%=(pageIndex2+rowsPerPage2)-1%>">
 								<tr>
 									<td>${pi.imageId}</td>
 									<td>

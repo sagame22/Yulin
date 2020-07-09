@@ -1,6 +1,6 @@
 package com.member.model;
 
-	public class MemberVO {
+	public class MemberVO implements java.io.Serializable {
 	    private String password;
 	    private String name;
 	    private int memberId;

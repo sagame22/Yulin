@@ -14,13 +14,13 @@ public class MemberDAOImpl implements MemberDAO {
 	private static final String UPATE_STMT = "update member set name= ? , password = ? where memberid = ? ";
 	private static final String DEL_STMT = "delete from member where memberid = ?";
 	private static final String GET_ONE = "select * from member where memberid = ?";
-	private static final String GET_ALL = "select * from member order by memberid desc limit ?,? ";
+	private static final String GET_ALL = "select * from member order by rownum desc";
 	private static final String GET_BY_NAME = "select * from member where name = ?";
     private static final String PASSWORD_NAME = "select * from member where name = ? and password=?";
 	@Override
 	public int getTotal() {
         int total = 0;
-        try (Connection c = JDBCUtilites.getConnection(); 
+        try (Connection c = JDBCUtilites.getConnectionJNDI(); 
         	PreparedStatement ps = c.prepareStatement(GET_TOTAL);
         	) 
         
@@ -39,7 +39,7 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public void add(MemberVO bean) {
 		
-        try (Connection c = JDBCUtilites.getConnection(); 
+        try (Connection c = JDBCUtilites.getConnectionJNDI(); 
         	PreparedStatement ps = c.prepareStatement(ADD_STMT);
         	) 
         
@@ -57,7 +57,7 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public void update(MemberVO bean) {
 		
-        try (Connection c = JDBCUtilites.getConnection(); 
+        try (Connection c = JDBCUtilites.getConnectionJNDI(); 
         	 PreparedStatement ps = c.prepareStatement(UPATE_STMT);
         	) 
         { 
@@ -76,7 +76,7 @@ public class MemberDAOImpl implements MemberDAO {
 
 	@Override
 	public void delete(int id) {
-		try (Connection c = JDBCUtilites.getConnection();
+		try (Connection c = JDBCUtilites.getConnectionJNDI();
 			PreparedStatement s = c.prepareStatement(DEL_STMT);
 			) 
 		
@@ -94,7 +94,7 @@ public class MemberDAOImpl implements MemberDAO {
 	public MemberVO get(int id) {
 		 MemberVO bean = null;
 		  
-	        try (Connection c = JDBCUtilites.getConnection();
+	        try (Connection c = JDBCUtilites.getConnectionJNDI();
 	        		PreparedStatement s = c.prepareStatement(GET_ONE);
 	        	) 
 	        	{
@@ -115,21 +115,15 @@ public class MemberDAOImpl implements MemberDAO {
 	        }
 	        return bean;
 	    }
+
 	@Override
 	public List<MemberVO> list() {
-        return list(0, Short.MAX_VALUE);
-    }
-
-	@Override
-	public List<MemberVO> list(int start, int count) {
 		  List<MemberVO> beans = new ArrayList<MemberVO>();
 
-	        try (Connection c = JDBCUtilites.getConnection();
+	        try (Connection c = JDBCUtilites.getConnectionJNDI();
 	        		PreparedStatement ps = c.prepareStatement(GET_ALL);
 	        	) 
 	        	{
-	            ps.setInt(1, start);
-	            ps.setInt(2, count);
 	  
 	            ResultSet rs = ps.executeQuery();
 	  
@@ -156,7 +150,7 @@ public class MemberDAOImpl implements MemberDAO {
 	public MemberVO get(String name) {
 		MemberVO bean = null;
              
-        try (Connection c = JDBCUtilites.getConnection();
+        try (Connection c = JDBCUtilites.getConnectionJNDI();
         		PreparedStatement ps = c.prepareStatement(GET_BY_NAME)
         	) 
         	{
@@ -183,7 +177,7 @@ public class MemberDAOImpl implements MemberDAO {
 	public MemberVO get(String name, String password) {
 		MemberVO bean = null;
         
-        try (Connection c = JDBCUtilites.getConnection();
+        try (Connection c = JDBCUtilites.getConnectionJNDI();
         	PreparedStatement ps = c.prepareStatement(PASSWORD_NAME)
         	) 
         	{
@@ -207,8 +201,8 @@ public class MemberDAOImpl implements MemberDAO {
     }
 	
 	   public boolean isExist(String name) {
-	        MemberVO user = get(name);
-	        return user!=null;
+	        MemberVO member = get(name);
+	        return member!=null;
 	 
 	    }
 		 

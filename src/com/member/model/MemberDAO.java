@@ -10,7 +10,6 @@ public interface MemberDAO {
 	public void delete(int id);
     public MemberVO get(int id);
     public List<MemberVO> list();
-    public List<MemberVO> list(int start, int count);
     public MemberVO get(String name);
     public MemberVO get(String name, String password);
 }

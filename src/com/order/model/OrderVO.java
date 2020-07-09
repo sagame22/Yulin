@@ -6,7 +6,7 @@ import java.util.List;
 import com.member.model.MemberVO;
 import com.orderitem.model.OrderItemVO;
  
-public class OrderVO {
+public class OrderVO implements java.io.Serializable{
 
 	   private String orderCode;
 	    private String address;

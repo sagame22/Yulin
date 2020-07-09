@@ -2,7 +2,7 @@ package com.productimage.model;
 
 import com.product.model.ProductVO;
 
-public class ProductImageVO {
+public class ProductImageVO implements java.io.Serializable{
 
     private String type;
     private ProductVO product;

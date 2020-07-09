@@ -2,7 +2,7 @@ package com.property.model;
 
 import com.category.model.CategoryVO;
 
-public class PropertyVO {
+public class PropertyVO implements java.io.Serializable{
 	 
     private String name;
     private CategoryVO categoryVO;
