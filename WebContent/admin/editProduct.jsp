@@ -35,7 +35,7 @@ $(function() {
 	</ol>
 	
 	<div class="panel panel-warning editDiv">
-		<div class="panel-heading">編輯產品</div>
+		<div class="list-group-item list-group-item-info">編輯產品</div>
 		<div class="panel-body">
 			<form method="post" id="editForm" action="admin_product_update">
 				<table class="editTable">

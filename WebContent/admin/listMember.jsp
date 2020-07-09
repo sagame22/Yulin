@@ -7,7 +7,6 @@
 <%@ page import="com.member.model.*"%>
 <%
     List<MemberVO> list = (List<MemberVO>)request.getAttribute("member");
-	pageContext.setAttribute("list",list);
 %>
 <script>
 </script>
@@ -24,7 +23,7 @@
 	<div class="listDataTableDiv">
 		<table class="table table-striped table-bordered table-hover  table-condensed">
 			<thead>
-				<tr class="success">
+				<tr class="bg-primary">
 					<th>ID</th>
 					<th>用戶名稱</th>
 				</tr>
@@ -34,7 +33,7 @@
 				<c:forEach items="${member}" var="m" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 				
 				<tr>
-					<td>${m.id}</td>
+					<td>${m.memberId}</td>
 					<td>${m.name}</td>
 				</tr>
 				</c:forEach>

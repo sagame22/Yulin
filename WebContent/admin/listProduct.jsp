@@ -95,7 +95,7 @@
 
 
 	<div class="panel panel-warning addDiv">
-		<div class="panel-heading">新增產品</div>
+		<div class="list-group-item list-group-item-info">新增產品</div>
 		<div class="panel-body">
 			<form method="post" id="addForm" action="admin_product_add">
 				<table class="addTable">

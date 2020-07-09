@@ -10,7 +10,7 @@ import com.member.model.MemberDAOImpl;
 import com.member.model.MemberVO;
 import com.uti.tool.JDBCUtilites;
 
-public class OrderDAOImpl {
+public class OrderDAOImpl implements OrderDAO {
 
 	public static final String waitPay = "waitPay";
     public static final String waitDelivery = "waitDelivery";
@@ -21,15 +21,15 @@ public class OrderDAOImpl {
     
     private static final String GET_TOTAL = "select count(*) from Order_";
 	private static final String ADD_STMT = "insert into Order_ values(ORDERID_SEQ.nextval,?,?,?,?,?,?,?,?,?,?,?,?)";
-	private static final String UPATE_STMT = "update Order_ set address= ?, post=?, receiver=?,mobile=?,userMessage=? ,orderDate = ? , payDate =? , deliveryDate =?, confirmDate = ? , OrderVOCode =?, uid=?, status=? where orderid = ?";
-	private static final String DEL_STMT = "delete from Order_ where Orderid = ";
-	private static final String GET_ONE = "select * from Order_ where Orderid = ";
-	private static final String GET_ALL = "select * from Order_ Order by Orderid desc limit ?,? ";
-	private static final String GET_ALL2 = "select * from Order_ where uid = ? and status != ? Order by orderid desc limit ?,? ";
+	private static final String UPATE_STMT = "update Order_ set address= ?, post=?, receiver=?,mobile=?,userMessage=? ,orderDate = ? , payDate =? , deliveryDate =?, confirmDate = ? , OrderCode =?, mid=?, status=? where orderid = ?";
+	private static final String DEL_STMT = "delete from Order_ where Orderid = ?";
+	private static final String GET_ONE = "select * from Order_ where Orderid = ?";
+	private static final String GET_ALL = "select * from Order_ Order by Orderid desc ";
+	private static final String GET_ALL2 = "select * from Order_ where uid = ? and status != ? Order by orderid desc";
 	
 	public int getTotal() {
         int total = 0;
-        try (Connection c = JDBCUtilites.getConnection();
+        try (Connection c = JDBCUtilites.getConnectionJNDI();
         		PreparedStatement ps = c.prepareStatement(GET_TOTAL);
         	) 
         	{
@@ -44,10 +44,10 @@ public class OrderDAOImpl {
         return total;
     }
   
-    public void add(OrderVO bean) {
- 
-        try (Connection c = JDBCUtilites.getConnection();
-        	PreparedStatement ps = c.prepareStatement(ADD_STMT);
+    public int add(OrderVO bean) {
+    	int[]cols= {1};
+        try (Connection c = JDBCUtilites.getConnectionJNDI();
+        	PreparedStatement ps = c.prepareStatement(ADD_STMT,cols);
         	) 
         	{
             ps.setString(1, bean.getOrderCode());
@@ -67,19 +67,20 @@ public class OrderDAOImpl {
             ps.execute();
   
             ResultSet rs = ps.getGeneratedKeys();
-            if (rs.next()) {
-                int id = rs.getInt(1);
-                bean.setId(id);
-            }
+            if(rs.next()) {
+        		int key = rs.getInt(1);
+        		return key;
+        	}
+  
         } catch (Exception e) {
   
             e.printStackTrace();
-        }
+        }		return 0;
     }
   
     public void update(OrderVO bean) {
  
-        try (Connection c = JDBCUtilites.getConnection();
+        try (Connection c = JDBCUtilites.getConnectionJNDI();
         	PreparedStatement ps = c.prepareStatement(UPATE_STMT);
         	) 
         	{
@@ -96,7 +97,7 @@ public class OrderDAOImpl {
             ps.setString(10, bean.getOrderCode());
             ps.setInt(11, bean.getMember().getMemberId());
             ps.setString(12, bean.getStatus());
-            ps.setInt(13, bean.getId());
+            ps.setInt(13, bean.getOrderId());
             ps.execute();
   
         } catch (Exception e) {
@@ -108,7 +109,7 @@ public class OrderDAOImpl {
   
     public void delete(int id) {
   
-        try (Connection c = JDBCUtilites.getConnection();
+        try (Connection c = JDBCUtilites.getConnectionJNDI();
         	 PreparedStatement ps = c.prepareStatement(DEL_STMT);
         	) 
         	{
@@ -124,22 +125,22 @@ public class OrderDAOImpl {
     public OrderVO get(int id) {
         OrderVO bean = new OrderVO();
   
-        try (Connection c = JDBCUtilites.getConnection();
+        try (Connection c = JDBCUtilites.getConnectionJNDI();
         	PreparedStatement ps = c.prepareStatement(GET_ONE);
         	) 
         	{
-  
+        	ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
   
             if (rs.next()) {
-                String OrderCode =rs.getString("OrderVOCode");
+                String OrderCode =rs.getString("OrderCode");
                 String address = rs.getString("address");
                 String post = rs.getString("post");
                 String receiver = rs.getString("receiver");
                 String mobile = rs.getString("mobile");
                 String userMessage = rs.getString("userMessage");
                 String status = rs.getString("status");
-                int uid =rs.getInt("uid");
+                int uid =rs.getInt("mid");
                 Date createDate = JDBCUtilites.s2u( rs.getDate("orderDate"));
                 Date payDate = JDBCUtilites.s2u( rs.getDate("payDate"));
                 Date deliveryDate = JDBCUtilites.s2u( rs.getDate("deliveryDate"));
@@ -159,7 +160,7 @@ public class OrderDAOImpl {
                 bean.setMember(user);
                 bean.setStatus(status);
                  
-                bean.setId(id);
+                bean.setOrderId(id);
             }
   
         } catch (Exception e) {
@@ -169,25 +170,20 @@ public class OrderDAOImpl {
         return bean;
     }
   
-    public List<OrderVO> list() {
-        return list(0, Short.MAX_VALUE);
-    }
   
-    public List<OrderVO> list(int start, int count) {
+    public List<OrderVO> list() {
         List<OrderVO> beans = new ArrayList<OrderVO>();
   
-        try (Connection c = JDBCUtilites.getConnection();
+        try (Connection c = JDBCUtilites.getConnectionJNDI();
         	PreparedStatement ps = c.prepareStatement(GET_ALL);
         	) 
         	{
-            ps.setInt(1, start);
-            ps.setInt(2, count);
   
             ResultSet rs = ps.executeQuery();
   
             while (rs.next()) {
                 OrderVO bean = new OrderVO();
-                String OrderCode =rs.getString("OrderVOCode");
+                String OrderCode =rs.getString("OrderCode");
                 String address = rs.getString("address");
                 String post = rs.getString("post");
                 String receiver = rs.getString("receiver");
@@ -198,10 +194,10 @@ public class OrderDAOImpl {
                 Date payDate = JDBCUtilites.s2u( rs.getDate("payDate"));
                 Date deliveryDate = JDBCUtilites.s2u( rs.getDate("deliveryDate"));
                 Date confirmDate = JDBCUtilites.s2u( rs.getDate("confirmDate"));
-                int uid =rs.getInt("uid");               
-                 
-                int id = rs.getInt("id");
-                bean.setId(id);
+                int mid =rs.getInt("mid");               
+                int orderId = rs.getInt("orderid");
+                
+                bean.setOrderId(orderId);
                 bean.setOrderCode(OrderCode);
                 bean.setAddress(address);
                 bean.setPost(post);
@@ -212,8 +208,8 @@ public class OrderDAOImpl {
                 bean.setPayDate(payDate);
                 bean.setDeliveryDate(deliveryDate);
                 bean.setConfirmDate(confirmDate);
-                MemberVO user = new MemberDAOImpl().get(uid);
-                bean.setMember(user);
+                MemberVO member = new MemberDAOImpl().get(mid);
+                bean.setMember(member);
                 bean.setStatus(status);
                 beans.add(bean);
             }
@@ -224,22 +220,18 @@ public class OrderDAOImpl {
         return beans;
     }
      
-    public List<OrderVO> list(int uid,String excludedStatus) {
-        return list(uid,excludedStatus,0, Short.MAX_VALUE);
-    }
+ 
       
-    public List<OrderVO> list(int uid, String excludedStatus, int start, int count) {
+    public List<OrderVO> list(int mid, String excludedStatus) {
         List<OrderVO> beans = new ArrayList<OrderVO>();
          
-        try (Connection c = JDBCUtilites.getConnection();
+        try (Connection c = JDBCUtilites.getConnectionJNDI();
         	PreparedStatement ps = c.prepareStatement(GET_ALL2);
         	) 
         	{
-            ps.setInt(1, uid);
+            ps.setInt(1, mid);
             ps.setString(2, excludedStatus);
-            ps.setInt(3, start);
-            ps.setInt(4, count);
-             
+            
             ResultSet rs = ps.executeQuery();
              
             while (rs.next()) {
@@ -255,9 +247,9 @@ public class OrderDAOImpl {
                 Date payDate = JDBCUtilites.s2u( rs.getDate("payDate"));
                 Date deliveryDate = JDBCUtilites.s2u( rs.getDate("deliveryDate"));
                 Date confirmDate = JDBCUtilites.s2u( rs.getDate("confirmDate"));
+                int orderId = rs.getInt("orderId");
                 
-                int id = rs.getInt("id");
-                bean.setId(id);
+                bean.setOrderId(orderId);
                 bean.setOrderCode(OrderCode);
                 bean.setAddress(address);
                 bean.setPost(post);
@@ -268,7 +260,7 @@ public class OrderDAOImpl {
                 bean.setPayDate(payDate);
                 bean.setDeliveryDate(deliveryDate);
                 bean.setConfirmDate(confirmDate);
-                MemberVO user = new MemberDAOImpl().get(uid);
+                MemberVO user = new MemberDAOImpl().get(mid);
                 bean.setStatus(status);
                 bean.setMember(user);
                 beans.add(bean);

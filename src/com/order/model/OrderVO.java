@@ -18,8 +18,8 @@ public class OrderVO implements java.io.Serializable{
 	    private Date payDate;
 	    private Date deliveryDate;
 	    private Date confirmDate;
-	    private MemberVO Member;
-	    private int id;
+	    private MemberVO member;
+	    private int orderId;
 	    private List<OrderItemVO> orderItems;
 	    private float total;
 	    private int totalNumber;
@@ -28,36 +28,36 @@ public class OrderVO implements java.io.Serializable{
 	    public String getStatusDesc(){
 	        String desc ="未知";
 	        switch(status){
-//	          case OrderDAO.waitPay:
-//	              desc="待付款";
-//	              break;
-//	          case OrderDAO.waitDelivery:
-//	              desc="待发货";
-//	              break;
-//	          case OrderDAO.waitConfirm:
-//	              desc="待收货";
-//	              break;
-//	          case OrderDAO.waitReview:
-//	              desc="等评价";
-//	              break;
-//	          case OrderDAO.finish:
-//	              desc="完成";
-//	              break;
-//	          case OrderDAO.delete:
-//	              desc="刪除";
-//	              break;
-//	          default:
-//	              desc="未知";
+	          case OrderDAOImpl.waitPay:
+	              desc="待付款";
+	              break;
+	          case OrderDAOImpl.waitDelivery:
+	              desc="待出貨";
+	              break;
+	          case OrderDAOImpl.waitConfirm:
+	              desc="待收貨";
+	              break;
+	          case OrderDAOImpl.waitReview:
+	              desc="待評價";
+	              break;
+	          case OrderDAOImpl.finish:
+	              desc="完成";
+	              break;
+	          case OrderDAOImpl.delete:
+	              desc="刪除";
+	              break;
+	          default:
+	              desc="未知";
 	        }
 	        return desc;
 	    }
 	     
-	    public int getId() {
-	        return id;
+	    public int getOrderId() {
+	        return orderId;
 	    }
 	 
-	    public void setId(int id) {
-	        this.id = id;
+	    public void setOrderId(int id) {
+	        this.orderId = id;
 	    }
 	    public String getAddress() {
 	        return address;
@@ -126,11 +126,11 @@ public class OrderVO implements java.io.Serializable{
 	    }
 	 
 	    public MemberVO getMember() {
-	        return Member;
+	        return member;
 	    }
 	 
 	    public void setMember(MemberVO user) {
-	        this.Member = user;
+	        this.member = user;
 	    }
 	 
 	    public List<OrderItemVO> getOrderItems() {

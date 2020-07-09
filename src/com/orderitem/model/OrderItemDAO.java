@@ -12,13 +12,10 @@ public interface OrderItemDAO {
 	public void delete(int id);
 	public OrderItemVO get(int id);
 	public List<OrderItemVO> listByUser(int uid);
-	public List<OrderItemVO> listByUser(int uid, int start, int count);
 	public List<OrderItemVO> listByOrder(int oid);
-	public List<OrderItemVO> listByOrder(int oid, int start, int count);
 	public void fill(List<OrderVO> os);
 	public void fill(OrderVO o);
 	public List<OrderItemVO> listByProduct(int pid);
-	public List<OrderItemVO> listByProduct(int pid, int start, int count);
 	public int getSaleCount(int pid);
 	
 }

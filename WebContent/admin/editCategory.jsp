@@ -31,7 +31,7 @@ $(function(){
 	</ol>
 
 	<div class="panel panel-warning editDiv">
-	  <div class="panel-heading">編輯分類</div>
+	  <div class="list-group-item list-group-item-info">編輯分類</div>
 	  <div class="panel-body">
 	    	<form method="post" id="editForm" action="admin_category_update"  enctype="multipart/form-data">
 	    		<table class="editTable">

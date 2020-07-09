@@ -7,7 +7,7 @@
 		<a style="height:60px;line-height:35px;" class="navbar-brand" href="#nowhere">YULIN後台</a>
 		
 		<a style="height:60px;line-height:35px;" class="navbar-brand" href="admin_category_list">分類管理</a>
-		<a style="height:60px;line-height:35px;" class="navbar-brand" href="admin_user_list">用戶管理</a>
+		<a style="height:60px;line-height:35px;" class="navbar-brand" href="admin_member_list">用戶管理</a>
 		<a style="height:60px;line-height:35px;" class="navbar-brand" href="admin_order_list">訂單管理</a>
 	</nav>
 </div>

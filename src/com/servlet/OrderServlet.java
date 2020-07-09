@@ -1,22 +1,21 @@
 package com.servlet;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.order.model.OrderDAOImpl;
+import com.order.model.OrderVO;
+@WebServlet("/orderServlet")
+public class OrderServlet extends BaseBackServlet {
 
-import com.member.model.MemberVO;
-@WebServlet("/memberServlet")
-public class MemberServlet extends BaseBackServlet {
-
-	
 	private static final long serialVersionUID = 1L;
 
 
 	public String add(HttpServletRequest request, HttpServletResponse response) {
-
 		return null;
 	}
 
@@ -24,10 +23,18 @@ public class MemberServlet extends BaseBackServlet {
 	public String delete(HttpServletRequest request, HttpServletResponse response) {
 		return null;
 	}
+	public String delivery(HttpServletRequest request, HttpServletResponse response) {
+		int id = Integer.parseInt(request.getParameter("id"));
+		OrderVO o = orderDAOImpl.get(id);
+		o.setDeliveryDate(new Date());
+		o.setStatus(OrderDAOImpl.waitConfirm);
+		orderDAOImpl.update(o);
+		return "@admin_order_list";
+	}
 
 	
 	public String edit(HttpServletRequest request, HttpServletResponse response) {
-		return null;		
+		return null;	
 	}
 
 	
@@ -37,10 +44,11 @@ public class MemberServlet extends BaseBackServlet {
 
 	
 	public String list(HttpServletRequest request, HttpServletResponse response) {
-		List<MemberVO> member = MemberDAOImpl.list();
+		List<OrderVO> os = orderDAOImpl.list();
 		
-		request.setAttribute("member", member);
+		orderItemDAOImpl.fill(os);
+		request.setAttribute("os", os);
 		
-		return "admin/listMember.jsp";
+		return "admin/listOrder.jsp";
 	}
 }

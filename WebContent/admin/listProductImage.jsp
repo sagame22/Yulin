@@ -44,7 +44,7 @@ $(function(){
 			<td class="addPictureTableTD">
 			  <div>
 				<div class="panel panel-warning addPictureDiv">
-					<div class="panel-heading">新增產品<b class="text-primary"> 單個 </b>圖片</div>
+					<div class="list-group-item list-group-item-info">新增產品<b class="text-primary"> 單個 </b>圖片</div>
 					  <div class="panel-body">
 					    	<form method="post" class="addFormSingle" action="admin_productImage_add" enctype="multipart/form-data">
 					    		<table class="addTable">
@@ -98,7 +98,7 @@ $(function(){
 			  <div>
 			  	
 				<div class="panel panel-warning addPictureDiv">
-					<div class="panel-heading">新增產品<b class="text-primary"> 詳情 </b>圖片</div>
+					<div class="list-group-item list-group-item-info">新增產品<b class="text-primary"> 詳情 </b>圖片</div>
 					  <div class="panel-body">
 					    	<form method="post" class="addFormDetail" action="admin_productImage_add" enctype="multipart/form-data">
 					    		<table class="addTable">

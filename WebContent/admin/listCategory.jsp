@@ -72,7 +72,7 @@ $(function(){
 	
 	
 	<div class="panel panel-warning addDiv">
-	  <div class="panel-heading">新增分類</div>
+	  <div class="list-group-item list-group-item-info">新增分類</div>
 	  <div class="panel-body">
 	    	<form method="post" id="addForm" action="admin_category_add" enctype="multipart/form-data" >
 	    		<table class="addTable">

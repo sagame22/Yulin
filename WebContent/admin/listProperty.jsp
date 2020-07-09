@@ -68,7 +68,7 @@
 
 
 	<div class="panel panel-warning addDiv">
-		<div class="panel-heading">新增屬性</div>
+		<div class="list-group-item list-group-item-info">新增屬性</div>
 		<div class="panel-body">
 			<form method="post" id="addForm" action="admin_property_add">
 				<table class="addTable">

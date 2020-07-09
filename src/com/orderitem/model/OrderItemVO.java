@@ -9,8 +9,8 @@ public class OrderItemVO implements java.io.Serializable {
 	   private int number;
 	    private ProductVO product;
 	    private OrderVO order;
-	    private MemberVO user;
-	    private int id;
+	    private MemberVO member;
+	    private int orderItemId;
 	    public int getNumber() {
 	        return number;
 	    }
@@ -29,17 +29,17 @@ public class OrderItemVO implements java.io.Serializable {
 	    public void setOrder(OrderVO order) {
 	        this.order = order;
 	    }
-	    public MemberVO getUser() {
-	        return user;
+	    public MemberVO getMember() {
+	        return member;
 	    }
-	    public void setUser(MemberVO user) {
-	        this.user = user;
+	    public void setMember(MemberVO user) {
+	        this.member = user;
 	    }
-	    public int getId() {
-	        return id;
+	    public int getOrderItemId() {
+	        return orderItemId;
 	    }
-	    public void setId(int id) {
-	        this.id = id;
+	    public void setOrderItemId(int id) {
+	        this.orderItemId = id;
 	    }
 	 
 	}
