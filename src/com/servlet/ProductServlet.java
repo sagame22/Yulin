@@ -68,9 +68,9 @@ public class ProductServlet extends BaseBackServlet {
 		int id = Integer.parseInt(request.getParameter("id"));
 		ProductVO p = productDAOImpl.get(id);
 		request.setAttribute("p", p);
-		
+		//初始化屬性值(若無擇創建一個PV對象),確保每條PV都能遍歷
 		propertyValueDAOImpl.init(p);
-		
+		//查詢該產品的全部屬性值
 		List<PropertyValueVO> pvs = propertyValueDAOImpl.list(p.getProductId());
 		
 		request.setAttribute("pvs", pvs);

@@ -24,9 +24,11 @@ public class OrderServlet extends BaseBackServlet {
 		return null;
 	}
 	public String delivery(HttpServletRequest request, HttpServletResponse response) {
+		//接收哪個會員的訂單
 		int id = Integer.parseInt(request.getParameter("id"));
 		OrderVO o = orderDAOImpl.get(id);
 		o.setDeliveryDate(new Date());
+		//修改訂單狀態
 		o.setStatus(OrderDAOImpl.waitConfirm);
 		orderDAOImpl.update(o);
 		return "@admin_order_list";

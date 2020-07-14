@@ -18,15 +18,15 @@ public class ReviewDAOImpl {
 	private static final String GET_TOTAL2 = "select count(*) from Review where pid = ?";
 	private static final String ADD_STMT = "insert into Review values(REVIEWID_SEQ.nextval,?,?,?,?)";
 	private static final String UPATE_STMT = "update Review set content= ?, uid=?, pid=? , reviewDate = ? where reviewid = ?";
-	private static final String DEL_STMT = "delete from Review where id = ?";
+	private static final String DEL_STMT = "delete from Review where Reviewid = ?";
 	private static final String GET_ONE = "select * from Review where Reviewid = ?";
 	private static final String GET_COUNT = "select count(*) from Review where pid = ? ";
-	private static final String GET_ALL = "select * from Review where pid = ? order by id desc limit ?,? ";
+	private static final String GET_ALL = "select * from Review where pid = ? order by rownum desc ";
 	private static final String GET_EXIST = "select * from Review where content = ? and pid = ?";
 
 	public int getTotal() {
         int total = 0;
-        try (Connection c = JDBCUtilites.getConnection();
+        try (Connection c = JDBCUtilites.getConnectionJNDI();
         		PreparedStatement ps = c.prepareStatement(GET_TOTAL);
         	) 
         	{
@@ -42,7 +42,7 @@ public class ReviewDAOImpl {
     }
     public int getTotal(int pid) {
         int total = 0;
-        try (Connection c = JDBCUtilites.getConnection();
+        try (Connection c = JDBCUtilites.getConnectionJNDI();
         		PreparedStatement ps = c.prepareStatement(GET_TOTAL2);
         	) 
         	{
@@ -59,7 +59,7 @@ public class ReviewDAOImpl {
   
     public void add(ReviewVO bean) {
  
-        try (Connection c = JDBCUtilites.getConnection();
+        try (Connection c = JDBCUtilites.getConnectionJNDI();
         	PreparedStatement ps = c.prepareStatement(ADD_STMT);
         	) 
         	{
@@ -83,7 +83,7 @@ public class ReviewDAOImpl {
   
     public void update(ReviewVO bean) {
  
-        try (Connection c = JDBCUtilites.getConnection();
+        try (Connection c = JDBCUtilites.getConnectionJNDI();
         	PreparedStatement ps = c.prepareStatement(UPATE_STMT);
         	) 
         	{
@@ -103,7 +103,7 @@ public class ReviewDAOImpl {
   
     public void delete(int id) {
   
-        try (Connection c = JDBCUtilites.getConnection();
+        try (Connection c = JDBCUtilites.getConnectionJNDI();
         	 PreparedStatement ps = c.prepareStatement(DEL_STMT);
         	) 
         	{
@@ -119,7 +119,7 @@ public class ReviewDAOImpl {
     public ReviewVO get(int id) {
         ReviewVO bean = new ReviewVO();
   
-        try (Connection c = JDBCUtilites.getConnection();
+        try (Connection c = JDBCUtilites.getConnectionJNDI();
         	PreparedStatement ps = c.prepareStatement(GET_ONE);
         	) 
         	{
@@ -150,13 +150,11 @@ public class ReviewDAOImpl {
         return bean;
     }
   
-    public List<ReviewVO> list(int pid) {
-        return list(pid, 0, Short.MAX_VALUE);
-    }
+
   
     public int getCount(int pid) {
   
-        try (Connection c = JDBCUtilites.getConnection();
+        try (Connection c = JDBCUtilites.getConnectionJNDI();
         	 PreparedStatement ps = c.prepareStatement(GET_COUNT);
         	) 
         	{
@@ -172,17 +170,16 @@ public class ReviewDAOImpl {
         }
         return 0;      
     }
-    public List<ReviewVO> list(int pid, int start, int count) {
+    public List<ReviewVO> list(int pid) {
         List<ReviewVO> beans = new ArrayList<ReviewVO>();
   
-        try (Connection c = JDBCUtilites.getConnection();
+        try (Connection c = JDBCUtilites.getConnectionJNDI();
         	 PreparedStatement ps = c.prepareStatement(GET_ALL);
         	) 
         	{
   
             ps.setInt(1, pid);
-            ps.setInt(2, start);
-            ps.setInt(3, count);
+           
   
             ResultSet rs = ps.executeQuery();
   
@@ -211,7 +208,7 @@ public class ReviewDAOImpl {
     }
     public boolean isExist(String content, int pid) {
          
-        try (Connection c = JDBCUtilites.getConnection();
+        try (Connection c = JDBCUtilites.getConnectionJNDI();
         	 PreparedStatement ps = c.prepareStatement(GET_EXIST)
         	) 
         	{

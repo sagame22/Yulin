@@ -21,7 +21,7 @@ public class CategoryServlet extends BaseBackServlet {
 	protected CategoryDAOImpl categoryDAOImpl = new CategoryDAOImpl();
 	private static final long serialVersionUID = 1L;
 
-
+	//新增直接new
 	public String add(HttpServletRequest request, HttpServletResponse response) {	
 		//取得上傳檔案的輸入流和圖檔名稱
 		int id=0;
@@ -57,7 +57,7 @@ public class CategoryServlet extends BaseBackServlet {
 		return "@admin_category_list";
 	}
 
-	
+	//修改要取得PK
 	public String edit(HttpServletRequest request, HttpServletResponse response) {
 		int id = Integer.parseInt(request.getParameter("categoryId"));
 		CategoryVO c = categoryDAOImpl.get(id);

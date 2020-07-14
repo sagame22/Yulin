@@ -17,10 +17,10 @@ public class OrderItemDAOImpl implements OrderItemDAO {
 
 	private static final String GET_TOTAL = "select count(*) from OrderItem";
 	private static final String ADD_STMT = "insert into OrderItem values(ORDERITEMID_SEQ.nextval,?,?,?,?)";
-	private static final String UPATE_STMT = "update OrderItem set pid= ?, oid=?, mid=?,number=?  where OrderItemid = ?";
+	private static final String UPATE_STMT = "update OrderItem set pid= ?, oid=?, mid=?,count=?  where OrderItemid = ?";
 	private static final String DEL_STMT = "delete from OrderItem where OrderItemid = ?";
 	private static final String GET_ONE = "select * from OrderItem where OrderItemid = ?";
-	private static final String GET_ONE2 = "select sum(number) from OrderItem where pid = ?";
+	private static final String GET_ONE2 = "select sum(count) from OrderItem where pid = ?";
 	private static final String GET_ALL = "select * from OrderItem where mid = ? and oid=-1 order by OrderItemid desc ";
 	private static final String GET_ALL2 = "select * from OrderItem where oid = ? order by OrderItemid desc";
 	private static final String GET_ALL3 = "select * from OrderItem where pid = ? order by OrderItemid desc";
@@ -57,14 +57,10 @@ public class OrderItemDAOImpl implements OrderItemDAO {
 	            else
 	                ps.setInt(2, bean.getOrder().getOrderId()); 
 	             
-	            ps.setInt(4, bean.getNumber());
+	            ps.setInt(3, bean.getMember().getMemberId());
+	            ps.setInt(4, bean.getCount());
 	            ps.execute();
 	  
-	            ResultSet rs = ps.getGeneratedKeys();
-	            if (rs.next()) {
-	                int id = rs.getInt(1);
-	                bean.setOrderItemId(id);
-	            }
 	        } catch (Exception e) {
 	  
 	            e.printStackTrace();
@@ -82,9 +78,9 @@ public class OrderItemDAOImpl implements OrderItemDAO {
 	            if(null==bean.getOrder())
 	                ps.setInt(2, -1);
 	            else
-	                ps.setInt(2, bean.getOrder().getOrderId());             
+	            ps.setInt(2, bean.getOrder().getOrderId());             
 	            ps.setInt(3, bean.getMember().getMemberId());
-	            ps.setInt(4, bean.getNumber());
+	            ps.setInt(4, bean.getCount());
 	             
 	            ps.setInt(5, bean.getOrderItemId());
 	            ps.execute();
@@ -120,6 +116,7 @@ public class OrderItemDAOImpl implements OrderItemDAO {
 
 	        	) 
 	        	{
+	        	ps.setInt(1, id);
 	            ResultSet rs = ps.executeQuery();
 	  
 	            if (rs.next()) {
@@ -131,7 +128,7 @@ public class OrderItemDAOImpl implements OrderItemDAO {
 	                MemberVO user = new MemberDAOImpl().get(uid);
 	                bean.setProduct(product);
 	                bean.setMember(user);
-	                bean.setNumber(number);
+	                bean.setCount(number);
 	                 
 	                if(-1!=oid){
 	                    OrderVO order= new OrderDAOImpl().get(oid);
@@ -177,7 +174,7 @@ public class OrderItemDAOImpl implements OrderItemDAO {
 	                bean.setProduct(product);
 	 
 	                bean.setMember(user);
-	                bean.setNumber(number);
+	                bean.setCount(number);
 	                bean.setOrderItemId(id);               
 	                beans.add(bean);
 	            }
@@ -204,7 +201,7 @@ public class OrderItemDAOImpl implements OrderItemDAO {
 	                int id = rs.getInt(1);
 	                 
 	                int pid = rs.getInt("pid");
-	                int uid = rs.getInt("mid");
+	                int mid = rs.getInt("mid");
 	                int number = rs.getInt("count");
 	                 
 	                ProductVO product = new ProductDAOImpl().get(pid);
@@ -212,12 +209,11 @@ public class OrderItemDAOImpl implements OrderItemDAO {
 	                    OrderVO order= new OrderDAOImpl().get(oid);
 	                    bean.setOrder(order);                  
 	                }
-	                 
-	                MemberVO user = new MemberDAOImpl().get(uid);
+	                MemberVO user = new MemberDAOImpl().get(mid);
+	                
 	                bean.setProduct(product);
-	                 
 	                bean.setMember(user);
-	                bean.setNumber(number);
+	                bean.setCount(number);
 	                bean.setOrderItemId(id);               
 	                beans.add(bean);
 	            }
@@ -229,13 +225,14 @@ public class OrderItemDAOImpl implements OrderItemDAO {
 	    }
 	 
 	    public void fill(List<OrderVO> os) {
+	    	//取出每筆訂單的訂單detail,把總價和總量算出來
 	        for (OrderVO o : os) {
 	            List<OrderItemVO> ois=listByOrder(o.getOrderId());
 	            float total = 0;
 	            int totalNumber = 0;
 	            for (OrderItemVO oi : ois) {
-	                 total+=oi.getNumber()*oi.getProduct().getPromotePrice();
-	                 totalNumber+=oi.getNumber();
+	                 total+=oi.getCount()*oi.getProduct().getPromotePrice();
+	                 totalNumber+=oi.getCount();
 	            }
 	            o.setTotal(total);
 	            o.setOrderItems(ois);
@@ -248,7 +245,7 @@ public class OrderItemDAOImpl implements OrderItemDAO {
 	        List<OrderItemVO> ois=listByOrder(o.getOrderId());
 	        float total = 0;
 	        for (OrderItemVO oi : ois) {
-	             total+=oi.getNumber()*oi.getProduct().getPromotePrice();
+	             total+=oi.getCount()*oi.getProduct().getPromotePrice();
 	        }
 	        o.setTotal(total);
 	        o.setOrderItems(ois);
@@ -284,7 +281,7 @@ public class OrderItemDAOImpl implements OrderItemDAO {
 	                bean.setProduct(product);
 	 
 	                bean.setMember(user);
-	                bean.setNumber(number);
+	                bean.setCount(number);
 	                bean.setOrderItemId(id);               
 	                beans.add(bean);
 	            }

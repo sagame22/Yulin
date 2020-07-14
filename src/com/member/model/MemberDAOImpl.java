@@ -187,7 +187,7 @@ public class MemberDAOImpl implements MemberDAO {
   
             if (rs.next()) {
                 bean = new MemberVO();
-                int id = rs.getInt("id");
+                int id = rs.getInt("MemberId");
                 bean.setName(name);
                 bean.setPassword(password);
                 bean.setMemberId(id);

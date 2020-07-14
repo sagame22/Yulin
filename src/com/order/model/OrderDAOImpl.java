@@ -66,11 +66,7 @@ public class OrderDAOImpl implements OrderDAO {
  
             ps.execute();
   
-            ResultSet rs = ps.getGeneratedKeys();
-            if(rs.next()) {
-        		int key = rs.getInt(1);
-        		return key;
-        	}
+            
   
         } catch (Exception e) {
   

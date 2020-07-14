@@ -37,11 +37,12 @@ public class ProductImageServlet extends BaseBackServlet {
 		pi.setProduct(p);
 		id = productImageDAOImpl.add(pi);
 		
-		// 生成文件
+		// 生成文件,用新增的ID作為圖檔名稱
 		String fileName = id + ".jpg";
 		String imageFolder;
 		String imageFolder_small = null;
 		String imageFolder_middle = null;
+		//判斷圖案類型選擇不一樣的存儲路徑
 		if (ProductImageDAOImpl.type_single.equals(pi.getType())) {
 			imageFolder = request.getServletContext().getRealPath("img/productSingle");
 			imageFolder_small = request.getServletContext().getRealPath("img/productSingle_small");
@@ -77,7 +78,7 @@ public class ProductImageServlet extends BaseBackServlet {
 			String imageFolder_small = request.getSession().getServletContext().getRealPath("img/productSingle_small");
 			String imageFolder_middle = request.getSession().getServletContext()
 					.getRealPath("img/productSingle_middle");
-
+			//獲取圖檔位置刪除之
 			File f_single = new File(imageFolder_single, pi.getImageId() + ".jpg");
 			f_single.delete();
 			File f_small = new File(imageFolder_small, pi.getImageId() + ".jpg");
@@ -104,6 +105,7 @@ public class ProductImageServlet extends BaseBackServlet {
 	}
 
 	public String list(HttpServletRequest request, HttpServletResponse response) {
+		//用該產品ID和圖片類型找出圖檔VO對象選發至View
 		String spid = request.getParameter("pid");
 		if(spid!=null) {
 		int pid = Integer.parseInt(spid);

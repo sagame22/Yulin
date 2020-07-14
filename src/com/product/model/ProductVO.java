@@ -19,6 +19,7 @@ public class ProductVO implements java.io.Serializable{
     private Date createDate;
     private CategoryVO categoryVO;
     private int productId;
+    //取多方圖片的第一張作為產品圖片
     private ProductImageVO firstProductImage;
     private List<ProductImageVO> productImages;
     private List<ProductImageVO> productSingleImages;

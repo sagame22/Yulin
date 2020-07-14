@@ -12,7 +12,6 @@ public interface ReviewDAO {
 	public ReviewVO get(int id);
 	public List<ReviewVO> list(int pid);
 	public int getCount(int pid);
-	public List<ReviewVO> list(int pid, int start, int count);
 	public boolean isExist(String content, int pid);
 	
 }

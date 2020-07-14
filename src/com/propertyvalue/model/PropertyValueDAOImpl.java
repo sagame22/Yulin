@@ -189,9 +189,11 @@ public class PropertyValueDAOImpl implements PropertyValueDAO {
     }
  
     public void init(ProductVO p) {
+    	//用產品的分類ID去查詢對應的屬性
         List<PropertyVO> pts= new PropertyDAOImpl().list(p.getCategory().getCategoryId());
          
         for (PropertyVO pt: pts) {
+        	//用產品和屬性ID查詢該條對應的屬性值PropertValueVO
             PropertyValueVO pv = get(pt.getPropertyId(),p.getProductId());
             if(null==pv){
                 pv = new PropertyValueVO();

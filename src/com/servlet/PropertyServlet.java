@@ -17,7 +17,7 @@ public class PropertyServlet extends BaseBackServlet {
 
 	private static final long serialVersionUID = 1L;
 
-
+	//多方新增要取得1方的PK
 	public String add(HttpServletRequest request, HttpServletResponse response) {
 		int cid = Integer.parseInt(request.getParameter("cid"));
 		CategoryVO c = categoryDAOImpl.get(cid);
@@ -43,7 +43,7 @@ public class PropertyServlet extends BaseBackServlet {
 		return "@admin_property_list?cid="+p.getCategory().getCategoryId();
 	}
 
-	
+	//查詢用PK查詢該條資料轉發至修改頁面
 	public String edit(HttpServletRequest request, HttpServletResponse response) {
 		int id = Integer.parseInt(request.getParameter("id"));
 		PropertyVO p = propertyDAOImpl.get(id);
@@ -77,6 +77,7 @@ public class PropertyServlet extends BaseBackServlet {
 		String scid = request.getParameter("cid");
 		if(scid!=null) {
 		int cid = Integer.parseInt(scid);
+		//把選定的分類VO和該分類底下的屬性存入
 		CategoryVO c = categoryDAOImpl.get(cid);
 		List<PropertyVO> ps = propertyDAOImpl.list(cid);
 		request.getSession().setAttribute("ps", ps);

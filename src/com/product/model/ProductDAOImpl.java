@@ -233,24 +233,29 @@ public class ProductDAOImpl implements ProductDAO {
 	        }
 	        return beans;
 	    }   
-	 
+	    //取所有分類
 	    public void fill(List<CategoryVO> cs) {
 	        for (CategoryVO c : cs)
 	            fill(c);
-	    }
+	    }//把該分類的所有產品取出,存入1方(展示前台)
 	    public void fill(CategoryVO c) {
 	            List<ProductVO> ps = this.list(c.getCategoryId());
 	            c.setProducts(ps);
 	    }
-	 
+	    
 	    public void fillByRow(List<CategoryVO> cs) {
+	    	//產品每列幾個
 	        int productNumberEachRow = 8;
 	        for (CategoryVO c : cs) {
+	        //取出分類的所有產品(list)	
 	            List<ProductVO> products =  c.getProducts();
+	        //把所有產品(list)存入list    
 	            List<List<ProductVO>> productsByRow =  new ArrayList<>();
 	            for (int i = 0; i < products.size(); i+=productNumberEachRow) {
+	            	//size算出總共幾列(往小的取)(大於取size())
 	                int size = i+productNumberEachRow;
 	                size= size>products.size()?products.size():size;
+	                //
 	                List<ProductVO> productsOfEachRow =products.subList(i, size);
 	                productsByRow.add(productsOfEachRow);
 	            }
