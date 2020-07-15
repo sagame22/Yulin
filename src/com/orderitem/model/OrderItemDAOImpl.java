@@ -43,10 +43,10 @@ public class OrderItemDAOImpl implements OrderItemDAO {
 	        return total;
 	    }
 	  
-	    public void add(OrderItemVO bean) {
-	 
+	    public int add(OrderItemVO bean) {
+	    	int []cols = {1};
 	        try (Connection c = JDBCUtilites.getConnectionJNDI();
-	        	PreparedStatement ps = c.prepareStatement(ADD_STMT);
+	        	PreparedStatement ps = c.prepareStatement(ADD_STMT,cols);
 	        	) 
 	        	{
 	            ps.setInt(1, bean.getProduct().getProductId());
@@ -60,11 +60,15 @@ public class OrderItemDAOImpl implements OrderItemDAO {
 	            ps.setInt(3, bean.getMember().getMemberId());
 	            ps.setInt(4, bean.getCount());
 	            ps.execute();
-	  
+	            ResultSet key = ps.getGeneratedKeys();
+	            if(key.next()) {
+	            	return key.getInt(1);
+	            }
 	        } catch (Exception e) {
 	  
 	            e.printStackTrace();
 	        }
+			return 0;
 	    }
 	  
 	    public void update(OrderItemVO bean) {
@@ -242,6 +246,7 @@ public class OrderItemDAOImpl implements OrderItemDAO {
 	    }
 	 
 	    public void fill(OrderVO o) {
+	    	//取出該訂單的所有訂單明細,得到產品總價
 	        List<OrderItemVO> ois=listByOrder(o.getOrderId());
 	        float total = 0;
 	        for (OrderItemVO oi : ois) {

@@ -50,7 +50,6 @@
 			<thead>
 				<tr>
 					<th colspan="2" class="productListTableFirstColumn">
-						<img class="tmallbuy" src="img/site/tmallbuy.png">
 						<a class="marketLink" href="#nowhere">Yulin小舖</a>
 						<a class="wangwanglink" href="#nowhere"> <span class="wangwangGif"></span> </a>
 					</th>
@@ -84,13 +83,13 @@
 						</td>
 						<td>
 						
-						<span class="orderItemProductPrice">￥<fmt:formatNumber type="number" value="${oi.product.promotePrice}" minFractionDigits="2"/></span>
+						<span class="orderItemProductPrice">NT$<fmt:formatNumber type="number" value="${oi.product.promotePrice}" minFractionDigits="2"/></span>
 						</td>
 						<td>
 						<span class="orderItemProductNumber">${oi.count}</span>
 						</td>
 						<td><span class="orderItemUnitSum">
-						￥<fmt:formatNumber type="number" value="${oi.count*oi.product.promotePrice}" minFractionDigits="2"/>
+						NT$<fmt:formatNumber type="number" value="${oi.count*oi.product.promotePrice}" minFractionDigits="2"/>
 						</span></td>
 						<c:if test="${st.count==1}">
 						<td rowspan="5"  class="orderItemLastTD">
@@ -115,9 +114,6 @@
 		<div class="orderItemSumDiv">
 			<div class="pull-left">
 				<span class="leaveMessageText">給店家留言:</span>
-				<span>
-					<img class="leaveMessageImg" src="img/site/leaveMessage.png">
-				</span>
 				<span class="leaveMessageTextareaSpan">
 					<textarea name="userMessage" class="leaveMessageTextarea"></textarea>
 					<div>
@@ -137,7 +133,7 @@
 	<div class="orderItemTotalSumDiv">
 		<div class="pull-right"> 
 			<span>實付：</span>
-			<span class="orderItemTotalSumSpan">￥<fmt:formatNumber type="number" value="${total}" minFractionDigits="2"/></span>
+			<span class="orderItemTotalSumSpan">NT$<fmt:formatNumber type="number" value="${total}" minFractionDigits="2"/></span>
 		</div>
 	</div>
 	

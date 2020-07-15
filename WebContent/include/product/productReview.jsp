@@ -17,7 +17,7 @@
 				<div class="productReviewItemContent">
 					${r.content }
 				</div>
-				<div class="productReviewItemDate"><fmt:formatDate value="${r.ReviewDate}" pattern="yyyy-MM-dd"/></div>
+				<div class="productReviewItemDate"><fmt:formatDate value="${r.reviewDate}" pattern="yyyy-MM-dd"/></div>
 			</div>
 			<div class="productReviewItemUserInfo">
 			

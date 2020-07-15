@@ -48,7 +48,7 @@ $(function(){
 					<tr>
 						<td>${o.orderId}</td>
 						<td>${o.statusDesc}</td>
-						<td>￥<fmt:formatNumber type="number" value="${o.total}" minFractionDigits="2"/></td>
+						<td>NT$<fmt:formatNumber type="number" value="${o.total}" minFractionDigits="2"/></td>
 						<td align="center">${o.totalNumber}</td>
 						<td align="center">${o.member.name}</td>
 						
@@ -85,11 +85,11 @@ $(function(){
 											</td>
 											<td align="right">
 											
-												<span class="text-muted">${oi.number}個</span>												
+												<span class="text-muted">${oi.count}個</span>												
 											</td>
 											<td align="right">
 											
-												<span class="text-muted">單價：￥${oi.product.promotePrice}</span>												
+												<span class="text-muted">單價：NT${oi.product.promotePrice}</span>												
 											</td>
 
 										</tr>

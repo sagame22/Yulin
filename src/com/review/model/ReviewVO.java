@@ -6,17 +6,17 @@ import com.product.model.ProductVO;
 public class ReviewVO {
 
 	 private String content;
-	    private Date ReviewDate;
+	    private Date reviewDate;
 	    private MemberVO memberVO;
 	    private ProductVO productVO;
-	    private int ReviewId;
+	    private int reviewId;
 	 
 	    public int getReviewId() {
-	        return ReviewId;
+	        return reviewId;
 	    }
 	 
 	    public void setReviewId(int id) {
-	        this.ReviewId = id;
+	        this.reviewId = id;
 	    }
 	    public String getContent() {
 	        return content;
@@ -25,10 +25,10 @@ public class ReviewVO {
 	        this.content = content;
 	    }
 	    public Date getReviewDate() {
-	        return ReviewDate;
+	        return reviewDate;
 	    }
 	    public void setReviewDate(Date createDate) {
-	        this.ReviewDate = createDate;
+	        this.reviewDate = createDate;
 	    }
 	     
 	    public MemberVO getMember() {

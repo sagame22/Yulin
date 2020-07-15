@@ -25,7 +25,7 @@ public class OrderDAOImpl implements OrderDAO {
 	private static final String DEL_STMT = "delete from Order_ where Orderid = ?";
 	private static final String GET_ONE = "select * from Order_ where Orderid = ?";
 	private static final String GET_ALL = "select * from Order_ Order by Orderid desc ";
-	private static final String GET_ALL2 = "select * from Order_ where uid = ? and status != ? Order by orderid desc";
+	private static final String GET_ALL2 = "select * from Order_ where mid = ? and status != ? Order by orderid desc";
 	
 	public int getTotal() {
         int total = 0;
@@ -57,15 +57,18 @@ public class OrderDAOImpl implements OrderDAO {
             ps.setString(5, bean.getMobile());
             ps.setString(6, bean.getUserMessage());
              
-            ps.setDate(7,  JDBCUtilites.u2s(bean.getOrderDate()));
-            ps.setDate(8,  JDBCUtilites.u2s(bean.getPayDate()));
-            ps.setDate(9,  JDBCUtilites.u2s(bean.getDeliveryDate()));
-            ps.setDate(10,  JDBCUtilites.u2s(bean.getConfirmDate()));
+            ps.setTimestamp(7,  JDBCUtilites.u2s(bean.getOrderDate()));
+            ps.setTimestamp(8,  JDBCUtilites.u2s(bean.getPayDate()));
+            ps.setTimestamp(9,  JDBCUtilites.u2s(bean.getDeliveryDate()));
+            ps.setTimestamp(10,  JDBCUtilites.u2s(bean.getConfirmDate()));
             ps.setInt(11, bean.getMember().getMemberId());
             ps.setString(12, bean.getStatus());
  
             ps.execute();
-  
+            ResultSet key = ps.getGeneratedKeys();
+            if(key.next()) {
+            	return key.getInt(1);
+            }
             
   
         } catch (Exception e) {
@@ -86,10 +89,10 @@ public class OrderDAOImpl implements OrderDAO {
             ps.setString(3, bean.getReceiver());
             ps.setString(4, bean.getMobile());
             ps.setString(5, bean.getUserMessage());
-            ps.setDate(6, JDBCUtilites.u2s(bean.getOrderDate()));;
-            ps.setDate(7, JDBCUtilites.u2s(bean.getPayDate()));;
-            ps.setDate(8, JDBCUtilites.u2s(bean.getDeliveryDate()));;
-            ps.setDate(9, JDBCUtilites.u2s(bean.getConfirmDate()));;
+            ps.setTimestamp(6, JDBCUtilites.u2s(bean.getOrderDate()));;
+            ps.setTimestamp(7, JDBCUtilites.u2s(bean.getPayDate()));;
+            ps.setTimestamp(8, JDBCUtilites.u2s(bean.getDeliveryDate()));;
+            ps.setTimestamp(9, JDBCUtilites.u2s(bean.getConfirmDate()));;
             ps.setString(10, bean.getOrderCode());
             ps.setInt(11, bean.getMember().getMemberId());
             ps.setString(12, bean.getStatus());
@@ -137,10 +140,10 @@ public class OrderDAOImpl implements OrderDAO {
                 String userMessage = rs.getString("userMessage");
                 String status = rs.getString("status");
                 int uid =rs.getInt("mid");
-                Date createDate = JDBCUtilites.s2u( rs.getDate("orderDate"));
-                Date payDate = JDBCUtilites.s2u( rs.getDate("payDate"));
-                Date deliveryDate = JDBCUtilites.s2u( rs.getDate("deliveryDate"));
-                Date confirmDate = JDBCUtilites.s2u( rs.getDate("confirmDate"));
+                Date createDate = rs.getTimestamp("orderDate");
+                Date payDate = rs.getTimestamp("payDate");
+                Date deliveryDate = rs.getTimestamp("deliveryDate");
+                Date confirmDate = rs.getTimestamp("confirmDate");
                  
                 bean.setOrderCode(OrderCode);
                 bean.setAddress(address);
@@ -186,10 +189,10 @@ public class OrderDAOImpl implements OrderDAO {
                 String mobile = rs.getString("mobile");
                 String userMessage = rs.getString("userMessage");
                 String status = rs.getString("status");
-                Date createDate = JDBCUtilites.s2u( rs.getDate("orderDate"));
-                Date payDate = JDBCUtilites.s2u( rs.getDate("payDate"));
-                Date deliveryDate = JDBCUtilites.s2u( rs.getDate("deliveryDate"));
-                Date confirmDate = JDBCUtilites.s2u( rs.getDate("confirmDate"));
+                Date createDate = rs.getTimestamp("orderDate");
+                Date payDate = rs.getTimestamp("payDate");
+                Date deliveryDate =  rs.getTimestamp("deliveryDate");
+                Date confirmDate =  rs.getTimestamp("confirmDate");
                 int mid =rs.getInt("mid");               
                 int orderId = rs.getInt("orderid");
                 
@@ -239,10 +242,10 @@ public class OrderDAOImpl implements OrderDAO {
                 String mobile = rs.getString("mobile");
                 String userMessage = rs.getString("userMessage");
                 String status = rs.getString("status");
-                Date createDate = JDBCUtilites.s2u( rs.getDate("orderDate"));
-                Date payDate = JDBCUtilites.s2u( rs.getDate("payDate"));
-                Date deliveryDate = JDBCUtilites.s2u( rs.getDate("deliveryDate"));
-                Date confirmDate = JDBCUtilites.s2u( rs.getDate("confirmDate"));
+                Date createDate = rs.getTimestamp("orderDate");
+                Date payDate = rs.getTimestamp("payDate");
+                Date deliveryDate =  rs.getTimestamp("deliveryDate");
+                Date confirmDate =  rs.getTimestamp("confirmDate");
                 int orderId = rs.getInt("orderId");
                 
                 bean.setOrderId(orderId);

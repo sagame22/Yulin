@@ -7,5 +7,5 @@
 	<img src="img/product/1.jpg">
 	<span class="productItemDesc">
     [熱銷]女裝 連身裙 777 </span>
-	<span class="productPrice">NT$49.8</span>
+	<span class="productPrice">NT$777</span>
 </div>

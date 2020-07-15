@@ -56,7 +56,7 @@ public class ProductDAOImpl implements ProductDAO {
 	            ps.setDouble(4, bean.getPromotePrice());
 	            ps.setInt(5, bean.getStock());
 	            ps.setInt(6, bean.getCategory().getCategoryId());
-	            ps.setDate(7, JDBCUtilites.u2s(bean.getCreateDate()));
+	            ps.setTimestamp(7, JDBCUtilites.u2s(bean.getCreateDate()));
 	            ps.execute();
 	            
 	            ResultSet rs = ps.getGeneratedKeys();
@@ -83,7 +83,7 @@ public class ProductDAOImpl implements ProductDAO {
 	            ps.setDouble(4, bean.getPromotePrice());
 	            ps.setInt(5, bean.getStock());
 	            ps.setInt(6, bean.getCategory().getCategoryId());
-	            ps.setDate(7, JDBCUtilites.u2s(bean.getCreateDate()));
+	            ps.setTimestamp(7, JDBCUtilites.u2s(bean.getCreateDate()));
 	            ps.setInt(8, bean.getProductId());
 	            ps.execute();
 	  
@@ -172,7 +172,7 @@ public class ProductDAOImpl implements ProductDAO {
 	                Double orignalPrice = rs.getDouble("orignalPrice");
 	                Double promotePrice = rs.getDouble("promotePrice");
 	                int stock = rs.getInt("stock");
-	                Date createDate = JDBCUtilites.s2u( rs.getDate("createDate"));
+	                Date createDate = rs.getDate("createDate");
 	 
 	                bean.setName(name);
 	                bean.setSubTitle(subTitle);
@@ -213,7 +213,7 @@ public class ProductDAOImpl implements ProductDAO {
 	                Double orignalPrice = rs.getDouble("orignalPrice");
 	                Double promotePrice = rs.getDouble("promotePrice");
 	                int stock = rs.getInt("stock");
-	                Date createDate = JDBCUtilites.s2u( rs.getDate("createDate"));
+	                Date createDate =  rs.getDate("createDate");
 	 
 	                bean.setName(name);
 	                bean.setSubTitle(subTitle);
@@ -308,7 +308,7 @@ public class ProductDAOImpl implements ProductDAO {
 	                    Double orignalPrice = rs.getDouble("orignalPrice");
 	                    Double promotePrice = rs.getDouble("promotePrice");
 	                    int stock = rs.getInt("stock");
-	                    Date createDate = JDBCUtilites.s2u( rs.getDate("createDate"));
+	                    Date createDate =  rs.getDate("createDate");
 	 
 	                    bean.setName(name);
 	                    bean.setSubTitle(subTitle);

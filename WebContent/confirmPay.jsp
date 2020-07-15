@@ -3,7 +3,6 @@
 
 <%@include file="include/header.jsp"%>
 <%@include file="include/top.jsp"%>
-<%@include file="include/search.jsp"%>
-
-<%@include file="include/product/productPage.jsp"%>
+<%@include file="include/simpleSearch.jsp"%>
+<%@include file="include/cart/confirmPayPage.jsp"%>
 <%@include file="include/footer.jsp"%>

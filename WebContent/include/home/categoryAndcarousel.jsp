@@ -4,15 +4,15 @@
 
 <script>
 function showProductsAsideCategorys(cid){
-	$("div.eachCategory[cid="+cid+"]").css("background-color","white");
+	$("div.eachCategory[cid="+cid+"]").css("background-color","rgba(55,55,55,0.8)");
 	$("div.eachCategory[cid="+cid+"] a").css("color","#87CEFA");
-	$("div.productsAsideCategorys[cid="+cid+"]").show();
+	$("div.productsAsideCategorys[cid="+cid+"]").show("slow");
 }
 
 
 function hideProductsAsideCategorys(cid){
-	$("div.eachCategory[cid="+cid+"]").css("background-color","#e2e2e3");
-	$("div.eachCategory[cid="+cid+"] a").css("color","#000");
+	$("div.eachCategory[cid="+cid+"]").css("background-color","rgb(15, 15, 15)");
+	$("div.eachCategory[cid="+cid+"] a").css("color","#999999");
 	$("div.productsAsideCategorys[cid="+cid+"]").hide();
 }
 $(function(){
@@ -47,40 +47,31 @@ $(function(){
 		$("img#catear").hide();
 	});
 	
-	var left = $("div#carousel-of-product").offset().left;
-	$("div.categoryMenu").css("left",left-20);
-	$("div.categoryWithCarousel div.head").css("margin-left",left);
-	$("div.productsAsideCategorys").css("left",left-20);
-	
 	
 });
 </script>
 
-<img src="img/site/catear.png" id="catear" class="catear"/>
-	
+   	
 <div class="categoryWithCarousel">
 
 
 <div class="headbar show1">
-	<div class="head ">
+	<div class="head">
 	
 		<span style="margin-left:10px" class="glyphicon glyphicon-th-list"></span>
 		<span style="margin-left:10px" >商品分類</span>
 		
 	</div>
 	
-	<div class="rightMenu">
-
-
-		<c:forEach items="${cs}" var="c" varStatus="st">
-			<c:if test="${st.count<=4}">
-				<span>
+		<c:forEach items="${cs}" var="c">
+			<div cid="${c.categoryId}" class="eachCategory">
+				<span class="glyphicon glyphicon-link"></span>
 				<a href="forecategory?cid=${c.categoryId}">
 					${c.name}
-				</a></span>			
-			</c:if>
+				</a>
+			</div>
 		</c:forEach>
-	</div>
+	
 	
 </div>
 

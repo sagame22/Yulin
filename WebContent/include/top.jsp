@@ -14,7 +14,7 @@
 		</c:if>
 		
 		<c:if test="${empty member}">
-			<a href="login.jsp">請登陸</a>
+			<a href="login.jsp">登入</a>
 			<a href="register.jsp">免費註冊</a>		
 		</c:if>
 

@@ -3,7 +3,7 @@
 
 
 <script>
-
+//確認庫存和購買數量
 $(function(){
 	var stock = ${p.stock};
 	$(".productNumberSetting").keyup(function(){
@@ -161,10 +161,10 @@ $(function(){
 		<div class="productPrice">
 			<div class="juhuasuan">
 				<span class="juhuasuanBig" >特賣會</span>
-				<span>此商品即將參加特賣會，<span class="juhuasuanTime">1天19小时</span>後開始，</span>
+				<span>此商品即將參加特賣會，<span class="juhuasuanTime">12小時</span>後開始，</span>
 			</div>
 			<div class="productPriceDiv">
-				<div class="gouwujuanDiv"><img height="16px" src="img/site/gouwujuan.png">
+				<div class="gouwujuanDiv">
 				
 				</div>
 				<div class="originalDiv">

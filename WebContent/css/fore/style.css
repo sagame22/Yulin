@@ -105,7 +105,7 @@ div.carouselBackgroundDiv{
 }
 
 div.categoryWithCarousel div.headbar {
-	background-color: #DD2727;
+	background-color: #0f0f0f;
 }
 
 div.carousel-of-product {
@@ -118,10 +118,10 @@ div.carousel-inner div.item img{
 }
 
 div.categoryWithCarousel div.categoryMenu {
-	width: 200px;
+	width: 277px;
 	background-color: #e2e2e3;
 	/* 	padding-bottom:10px; */
-	margin-left: 20px;
+	margin-left: 0px;
 	position: absolute;
 	left: 0;
 	top: 0;
@@ -129,15 +129,15 @@ div.categoryWithCarousel div.categoryMenu {
 }
 
 div.categoryWithCarousel div.productsAsideCategorys {
-	width: 825px;
+	width: 1200px;
 	height: 510px;
-	background-color: white;
+	background-color: rgba(55,55,55,0.8);
 	/* 	padding-bottom:10px; */
-	margin-left: 220px;
+	margin-left: 278px;
 	display: none;
 	position: absolute;
-	left: 0;
-	top: 0;
+	left: 100;
+	top: 100;
 	z-index: 1;
 }
 
@@ -151,6 +151,10 @@ div.categoryWithCarousel div.eachCategory span {
 
 div.categoryWithCarousel div.eachCategory {
 	/* 	height:30px; */
+	color: #999999;
+	bcakground-color:rgb(15, 15, 15);
+	display:inline-block;
+	width:150px;
 	line-height: 30px;
 	padding-left: 10px;
 	/* 	border:1px dashed lightgray; */
@@ -178,13 +182,14 @@ div.categoryWithCarousel div.rightMenu a {
 
 div.categoryWithCarousel div.head {
 	width: 200px;
-	background-color: #C60A0A;
+	background-color: #0f0f0f;
 	height: 36px;
 	line-height: 36px;
 	font-size: 16px;
 	font-weight: bold;
 	color: white;
-	margin-left: 20px;
+	margin-left: 50px;
+	margin-right: 21px;
 	display: inline-block;
 }
 
@@ -207,15 +212,21 @@ div.productsAsideCategorys div.row div.seperator {
 	margin-top: 20px;
 	border-bottom-style: dashed;
 	border-bottom-width: 1px;
-	border-bottom-color: #e7e7e7;
+	border-bottom-color: rgba(255,255,255,0.5);
 }
 
 div.categoryMenu a {
 	color: #000;
+	display:inline-block;
+	width:277px;
+	height:40px;
+	line-height:40px;
+	padding-left:100px;
+	border-bottom:1px dotted #c1c1c1;
 }
 
 div.categoryMenu a:hover {
-	color: lightskyblue;
+	color: #f5f5f5;
 	text-decoration: none;
 }
 

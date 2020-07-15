@@ -17,7 +17,7 @@ public class ReviewDAOImpl {
 	private static final String GET_TOTAL = "select count(*) from Review";
 	private static final String GET_TOTAL2 = "select count(*) from Review where pid = ?";
 	private static final String ADD_STMT = "insert into Review values(REVIEWID_SEQ.nextval,?,?,?,?)";
-	private static final String UPATE_STMT = "update Review set content= ?, uid=?, pid=? , reviewDate = ? where reviewid = ?";
+	private static final String UPATE_STMT = "update Review set content= ?, mid=?, pid=? , reviewDate = ? where reviewid = ?";
 	private static final String DEL_STMT = "delete from Review where Reviewid = ?";
 	private static final String GET_ONE = "select * from Review where Reviewid = ?";
 	private static final String GET_COUNT = "select count(*) from Review where pid = ? ";
@@ -66,15 +66,11 @@ public class ReviewDAOImpl {
             ps.setString(1, bean.getContent());
             ps.setInt(2, bean.getMember().getMemberId());
             ps.setInt(3, bean.getProduct().getProductId());
-            ps.setDate(4, JDBCUtilites.u2s(bean.getReviewDate()));
+            ps.setTimestamp(4, JDBCUtilites.u2s(bean.getReviewDate()));
              
             ps.execute();
   
-            ResultSet rs = ps.getGeneratedKeys();
-            if (rs.next()) {
-                int id = rs.getInt(1);
-                bean.setReviewId(id);
-            }
+           
         } catch (Exception e) {
   
             e.printStackTrace();
@@ -90,7 +86,7 @@ public class ReviewDAOImpl {
             ps.setString(1, bean.getContent());
             ps.setInt(2, bean.getMember().getMemberId());
             ps.setInt(3, bean.getProduct().getProductId());
-            ps.setDate(4, JDBCUtilites.u2s( bean.getReviewDate()) );
+            ps.setTimestamp(4, JDBCUtilites.u2s( bean.getReviewDate()) );
             ps.setInt(5, bean.getReviewId());
             ps.execute();
   
@@ -129,7 +125,7 @@ public class ReviewDAOImpl {
             if (rs.next()) {
                 int pid = rs.getInt("pid");
                 int uid = rs.getInt("uid");
-                Date createDate = JDBCUtilites.u2s(rs.getTimestamp("reviewDate"));
+                Date createDate = rs.getTimestamp("reviewDate");
                  
                 String content = rs.getString("content");
                  
@@ -187,8 +183,8 @@ public class ReviewDAOImpl {
                 ReviewVO bean = new ReviewVO();
                 int id = rs.getInt(1);
  
-                int uid = rs.getInt("uid");
-                Date createDate = JDBCUtilites.u2s(rs.getTimestamp("ReviewDate"));
+                int uid = rs.getInt("mid");
+                Date createDate = rs.getTimestamp("ReviewDate");
                 String content = rs.getString("content");
                 ProductVO ProductVO = new ProductDAOImpl().get(pid);
                 MemberVO user = new MemberDAOImpl().get(uid);

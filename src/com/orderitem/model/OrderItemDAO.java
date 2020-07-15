@@ -7,7 +7,7 @@ import com.order.model.OrderVO;
 public interface OrderItemDAO {
 
 	public int getTotal();
-	public void add(OrderItemVO bean);
+	public int add(OrderItemVO bean);
 	public void update(OrderItemVO bean);
 	public void delete(int id);
 	public OrderItemVO get(int id);

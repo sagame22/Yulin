@@ -34,10 +34,8 @@
 			    <span class="descColumnTitle">商家服務</span>
 			    <a href="#nowhere" >商架註冊</a> 
 			    <a href="#nowhere" >商家中心</a> 
-			    <a href="#nowhere" >Yulin智庫</a>
 			    <a href="#nowhere" >Yulin規則</a>
 			    <a href="#nowhere" >物流服務</a>
-			    <a href="#nowhere" >XXXX</a>
 			    <a href="#nowhere" >運營服務</a>
 			</div>
             <div class="descColumn">

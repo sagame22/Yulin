@@ -9,7 +9,7 @@
 	<form action="foresearch" method="post" >	
 		<div class="searchDiv col-md-9">
 			<input name="keyword" type="text" placeholder="時尚男裝 " class="keyword">
-			<button  type="submit" class="btn btn-primary">搜尋</button>
+			<button  type="submit" class="btn">搜尋</button>
 			<div class="searchBelow">
 				<c:forEach items="${cs}" var="c" varStatus="st">
 					<c:if test="${st.count>=5 and st.count<=8}">

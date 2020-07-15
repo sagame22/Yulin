@@ -176,6 +176,7 @@ public class ForeServlet extends BaseForeServlet {
 		boolean found = false;
 		List<OrderItemVO> ois = orderItemDAO.listByUser(member.getMemberId());
 		//將訂單細項取出比對,若產品相同則將產品數量累加
+		
 		for (OrderItemVO oi : ois) {
 			if(oi.getProduct().getProductId()==p.getProductId()){
 				oi.setCount(oi.getCount()+num);
@@ -193,8 +194,7 @@ public class ForeServlet extends BaseForeServlet {
 			oi.setMember(member);
 			oi.setCount(num);
 			oi.setProduct(p);
-			orderItemDAO.add(oi);
-			oiid = oi.getOrderItemId();
+			oiid = orderItemDAO.add(oi);
 		}
 		return "@forebuy?oiid="+oiid;
 	}
@@ -294,6 +294,7 @@ public class ForeServlet extends BaseForeServlet {
 		}
 	 
 	 public String createOrder(HttpServletRequest request, HttpServletResponse response){
+		 //提交訂單
 		 MemberVO member =(MemberVO) request.getSession().getAttribute("member");
 		     //取得會員編號和訂單明細
 		    List<OrderItemVO> ois= (List<OrderItemVO>) request.getSession().getAttribute("ois");
@@ -318,8 +319,10 @@ public class ForeServlet extends BaseForeServlet {
 		    order.setOrderDate(new Date());
 		    order.setMember(member);
 		    order.setStatus(OrderDAOImpl.waitPay);
-		 
+		    //新增訂單和加入ORDER的PK給多方的orderItem
 		    int orderPK = orderDAO.add(order);
+		    order.setOrderId(orderPK);
+		    
 		    float total =0;
 		    for (OrderItemVO oi: ois) {
 		        oi.setOrder(order);
@@ -343,4 +346,74 @@ public class ForeServlet extends BaseForeServlet {
 		    request.setAttribute("o", order);
 		    return "payed.jsp";    
 		} 
+	 public String bought(HttpServletRequest request, HttpServletResponse response) {
+		 	//顯示我的訂單
+		    MemberVO member =(MemberVO) request.getSession().getAttribute("member");
+		    
+		    List<OrderVO> os= orderDAO.list(member.getMemberId(),OrderDAOImpl.delete);
+		    orderItemDAO.fill(os);
+		     
+		    request.setAttribute("os", os);
+		     
+		    return "bought.jsp";       
+		}
+	 
+	 public String confirmPay(HttpServletRequest request, HttpServletResponse response) {
+			int oid = Integer.parseInt(request.getParameter("oid"));
+			OrderVO o = orderDAO.get(oid);
+			orderItemDAO.fill(o);
+			request.setAttribute("o", o);
+			return "confirmPay.jsp";		
+		}
+	 
+	 public String orderConfirmed(HttpServletRequest request, HttpServletResponse response) {
+			int oid = Integer.parseInt(request.getParameter("oid"));
+			OrderVO o = orderDAO.get(oid);
+			o.setStatus(OrderDAOImpl.waitReview);
+			o.setConfirmDate(new Date());
+			orderDAO.update(o);
+			return "orderConfirmed.jsp";
+		}
+	 public String deleteOrder(HttpServletRequest request, HttpServletResponse response){
+			int oid = Integer.parseInt(request.getParameter("oid"));
+			OrderVO o = orderDAO.get(oid);
+			o.setStatus(OrderDAOImpl.delete);
+			orderDAO.update(o);
+			return "%success";		
+		}
+	 public String review(HttpServletRequest request, HttpServletResponse response) {
+		    int oid = Integer.parseInt(request.getParameter("oid"));
+		    OrderVO o = orderDAO.get(oid);
+		    orderItemDAO.fill(o);
+		    ProductVO p = o.getOrderItems().get(0).getProduct();
+		    List<ReviewVO> reviews = reviewDAO.list(p.getProductId());
+		    productDAO.setSaleAndReviewNumber(p);
+		    request.setAttribute("p", p);
+		    request.setAttribute("o", o);
+		    request.setAttribute("reviews", reviews);
+		    return "review.jsp";       
+		}
+	 
+	 public String doreview(HttpServletRequest request, HttpServletResponse response) {
+		    int oid = Integer.parseInt(request.getParameter("oid"));
+		    OrderVO o = orderDAO.get(oid);
+		    o.setStatus(OrderDAOImpl.finish);
+		    orderDAO.update(o);
+		    int pid = Integer.parseInt(request.getParameter("pid"));
+		    ProductVO p = productDAO.get(pid);
+		     
+		    String content = request.getParameter("content");
+		     
+		    content = HtmlUtils.htmlEscape(content);
+		 
+		    MemberVO member =(MemberVO) request.getSession().getAttribute("member");
+		    ReviewVO review = new ReviewVO();
+		    review.setContent(content);
+		    review.setProduct(p);
+		    review.setReviewDate(new Date());
+		    review.setMember(member);
+		    reviewDAO.add(review);
+		     
+		    return "@forereview?oid="+oid+"&showonly=true";    
+		}
 }

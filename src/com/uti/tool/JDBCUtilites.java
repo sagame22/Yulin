@@ -100,11 +100,11 @@ public class JDBCUtilites {
 	    return output.toByteArray();
 	}
 	//util date to sql date 
-	public static java.sql.Date u2s(java.util.Date date){
+	public static java.sql.Timestamp u2s(java.util.Date date){
 		if(date==null) {
 			return null;
 		}else {
-			java.sql.Date sdate = new java.sql.Date(date.getTime());
+			java.sql.Timestamp sdate = new java.sql.Timestamp(date.getTime());
 			return sdate;
 		}
 	} 
