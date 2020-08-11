@@ -38,6 +38,6 @@
 	</c:forEach>
 	
 	
-	<img id="endpng" class="endpng" src="img/site/end.png">
+<!-- 	<img id="endpng" class="endpng" src="img/site/end.png"> -->
 
 </div>
