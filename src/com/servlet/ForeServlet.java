@@ -49,6 +49,7 @@ public class ForeServlet extends BaseForeServlet {
 	public String register(HttpServletRequest request, HttpServletResponse response) {
 		String name = request.getParameter("name");
 		String password = request.getParameter("password");
+		//轉譯HTML標籤
 		name = HtmlUtils.htmlEscape(name);
 		//判斷使用者帳戶名稱是否有使用
 		boolean exist = memberDAO.isExist(name);

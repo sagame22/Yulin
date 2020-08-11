@@ -8,7 +8,7 @@ import com.orderitem.model.OrderItemVO;
  
 public class OrderVO implements java.io.Serializable{
 
-	   private String orderCode;
+	    private String orderCode;
 	    private String address;
 	    private String post;
 	    private String receiver;

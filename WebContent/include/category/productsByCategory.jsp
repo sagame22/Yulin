@@ -18,7 +18,7 @@
 				<a href="foreproduct?pid=${p.productId}">
 					<img class="productImage" src="img/productSingle_middle/${p.firstProductImage.imageId}.jpg">
 				</a>
-				<span class="productPrice">¥<fmt:formatNumber type="number" value="${p.promotePrice}" minFractionDigits="2"/></span>
+				<span class="productPrice">NT$<fmt:formatNumber type="number" groupingUsed = "false" value="${p.promotePrice}"/>元</span>
 				<a class="productLink" href="foreproduct?pid=${p.productId}">
 				 ${fn:substring(p.name, 0, 50)}
 				</a>
@@ -26,7 +26,7 @@
 				<a  class="tmallLink" href="foreproduct?pid=${p.productId}">Yulin專賣</a>
 	
 				<div class="show1 productInfo">
-					<span class="monthDeal ">月成交 <span class="productDealNumber">${p.saleCount}笔</span></span>
+					<span class="monthDeal ">月成交 <span class="productDealNumber">${p.saleCount}筆</span></span>
 					<span class="productReview">評價<span class="productReviewNumber">${p.reviewCount}</span></span>
 					<span class="wangwang">
 					<a class="wangwanglink" href="#nowhere">

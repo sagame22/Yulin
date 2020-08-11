@@ -51,7 +51,7 @@ public class OrderItemDAOImpl implements OrderItemDAO {
 	        	{
 	            ps.setInt(1, bean.getProduct().getProductId());
 	             
-	            //訂單創建,無訊息
+	            //訂單明細創建,無訊息
 	            if(null==bean.getOrder())
 	                ps.setInt(2, -1);
 	            else

@@ -176,9 +176,9 @@ function calcCartSumPriceAndNumber(){
 	$("img.cartProductItemIfSelected[selectit='selectit']").each(function(){
 		var oiid = $(this).attr("oiid");
 		var price =$(".cartProductItemSmallSumPrice[oiid="+oiid+"]").text();
-		price = price.replace(/,/g, "");
+		console.log(price);
 		price = price.replace("NT$", "");
-		
+		price = price.replace("元", "");
 		sum += new Number(price);	
 		
 		var num =$(".orderItemNumberSetting[oiid="+oiid+"]").val();
@@ -250,8 +250,8 @@ function syncPrice(pid,num,price){
 							
 						</td>
 						<td>
-							<span class="cartProductItemOringalPrice">NT${oi.product.orignalPrice}</span>
-							<span class="cartProductItemPromotionPrice">NT${oi.product.promotePrice}</span>
+							<span class="cartProductItemOringalPrice">NT$<fmt:formatNumber type="number" value="${oi.product.orignalPrice}"/></span>
+							<span class="cartProductItemPromotionPrice">$NT<fmt:formatNumber type="number" value="${oi.product.promotePrice}"/></span>
 							
 						</td>
 						<td>
@@ -267,7 +267,7 @@ function syncPrice(pid,num,price){
 						 </td>
 						<td >
 							<span class="cartProductItemSmallSumPrice" oiid="${oi.orderItemId}" pid="${oi.product.productId}" >
-							NT$<fmt:formatNumber type="number" value="${oi.product.promotePrice*oi.count}" minFractionDigits="2"/>
+							NT$<fmt:formatNumber type="number" value="${oi.product.promotePrice*oi.count}"/>元
 							</span>
 						
 						</td>
@@ -290,7 +290,7 @@ function syncPrice(pid,num,price){
 			<span>已選商品 <span class="cartSumNumber" >0</span> 件</span>
 			
 			<span>合計(不含運費): </span> 
-			<span class="cartSumPrice" >NT$0.00</span>
+			<span class="cartSumPrice" >NT$0</span>
 			<button class="createOrderButton" disabled="disabled" >結算</button>
 		</div>
 		

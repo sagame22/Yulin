@@ -6,7 +6,7 @@ import com.product.model.ProductVO;
 
 public class OrderItemVO implements java.io.Serializable {
 
-	   private int count;
+	    private int count;
 	    private ProductVO product;
 	    private OrderVO order;
 	    private MemberVO member;

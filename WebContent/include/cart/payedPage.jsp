@@ -11,7 +11,7 @@
 		<ul>
 			<li>收貨地址：${o.address} ${o.receiver} ${o.mobile }</li>
 			<li>實付：<span class="payedInfoPrice">
-			NT$<fmt:formatNumber type="number" value="${param.total}" minFractionDigits="2"/>
+			NT$<fmt:formatNumber type="number" value="${param.total}" />元
 			</li>
 			<li>預計七日內送達</li>
 		</ul>

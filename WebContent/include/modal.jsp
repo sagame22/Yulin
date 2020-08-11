@@ -12,12 +12,12 @@
 							</div>
 						</div>
 							
-						<div class="login_acount_text">帳戶登錄</div>
+						<div class="login_acount_text">帳號登入</div>
 						<div class="loginInput " >
 							<span class="loginInputIcon ">
 								<span class=" glyphicon glyphicon-user"></span>
 							</span>
-							<input id="name" name="name" placeholder="手機/會員名/郵件" type="text">			
+							<input id="name" name="name" placeholder="會員名稱/郵件" type="text">			
 						</div>
 						
 						<div class="loginInput " >
@@ -26,13 +26,13 @@
 							</span>
 							<input id="password" name="password"  type="password" placeholder="密碼" type="text">			
 						</div>
-									<span class="text-danger">請登陸</span><br><br>
+									<span class="text-danger"></span><br><br>
 						<div>
 							<a href="#nowhere">忘記密碼</a> 
 							<a href="register.jsp" class="pull-right">免費註冊</a> 
 						</div>
 						<div style="margin-top:20px">
-							<button class="btn btn-block redButton loginSubmitButton" type="submit">登陸</button>
+							<button class="btn btn-block loginSubmitButton" type="submit">登入</button>
 						</div>
 					</div>	
 	      </div>

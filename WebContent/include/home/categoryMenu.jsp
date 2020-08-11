@@ -6,10 +6,12 @@
 	
 		<c:forEach items="${cs}" var="c" varStatus="st">
 			<c:if test="${st.count<=4}">
-				<span>
+			
+			
 				<a href="forecategory?cid=${c.categoryId}">
+				<span class="glyphicon glyphicon-link"></span>
 					${c.name}
-				</a></span>			
+				</a>		
 			</c:if>
 		</c:forEach>
 	</div>

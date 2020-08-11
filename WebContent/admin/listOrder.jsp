@@ -48,7 +48,7 @@ $(function(){
 					<tr>
 						<td>${o.orderId}</td>
 						<td>${o.statusDesc}</td>
-						<td>NT$<fmt:formatNumber type="number" value="${o.total}" minFractionDigits="2"/></td>
+						<td>NT$<fmt:formatNumber type="number" value="${o.total}" />元</td>
 						<td align="center">${o.totalNumber}</td>
 						<td align="center">${o.member.name}</td>
 						

@@ -83,13 +83,13 @@
 						</td>
 						<td>
 						
-						<span class="orderItemProductPrice">NT$<fmt:formatNumber type="number" value="${oi.product.promotePrice}" minFractionDigits="2"/></span>
+						<span class="orderItemProductPrice">NT$<fmt:formatNumber type="number" value="${oi.product.promotePrice}" />元</span>
 						</td>
 						<td>
 						<span class="orderItemProductNumber">${oi.count}</span>
 						</td>
 						<td><span class="orderItemUnitSum">
-						NT$<fmt:formatNumber type="number" value="${oi.count*oi.product.promotePrice}" minFractionDigits="2"/>
+						NT$<fmt:formatNumber type="number" value="${oi.count*oi.product.promotePrice}"/>元
 						</span></td>
 						<c:if test="${st.count==1}">
 						<td rowspan="5"  class="orderItemLastTD">
@@ -122,7 +122,7 @@
 				</span>
 			</div>
 			
-			<span class="pull-right">店鋪合計(含運費): NT$<fmt:formatNumber type="number" value="${total}" minFractionDigits="2"/></span>
+			<span class="pull-right">店鋪合計(含運費): NT$<fmt:formatNumber type="number" value="${total}" />元</span>
 		</div>
 		
 
@@ -133,7 +133,7 @@
 	<div class="orderItemTotalSumDiv">
 		<div class="pull-right"> 
 			<span>實付：</span>
-			<span class="orderItemTotalSumSpan">NT$<fmt:formatNumber type="number" value="${total}" minFractionDigits="2"/></span>
+			<span class="orderItemTotalSumSpan">NT$<fmt:formatNumber type="number" value="${total}" />元</span>
 		</div>
 	</div>
 	

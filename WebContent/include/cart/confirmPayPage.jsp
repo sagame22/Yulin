@@ -35,16 +35,16 @@
 					<td class="confirmPayOrderItemProductLink">
 						<a href="#nowhere">${oi.product.name}</a>
 					</td>
-					<td>NT$<fmt:formatNumber type="number" value="${oi.product.orignalPrice}" minFractionDigits="2"/></td>
+					<td>NT$<fmt:formatNumber type="number" value="${oi.product.orignalPrice}" />元</td>
 					<td>1</td>
-					<td><span class="conformPayProductPrice">NT$<fmt:formatNumber type="number" value="${oi.product.promotePrice}" minFractionDigits="2"/></span></td>
+					<td><span class="conformPayProductPrice">NT$<fmt:formatNumber type="number" value="${oi.product.promotePrice}"/>元</span></td>
 					<td><span>快遞 ： 0.00 </span></td>
 				</tr>
 			</c:forEach>
 		</table>
 		
 		<div class="confirmPayOrderItemText pull-right">
-			實付： <span class="confirmPayOrderItemSumPrice">NT$<fmt:formatNumber type="number" value="${o.total}" minFractionDigits="2"/></span>
+			實付： <span class="confirmPayOrderItemSumPrice">NT$<fmt:formatNumber type="number" value="${o.total}" />元</span>
 		</div>
 		
 		

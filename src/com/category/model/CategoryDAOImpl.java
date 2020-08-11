@@ -11,12 +11,12 @@ import com.uti.tool.JDBCUtilites;
 
 public class CategoryDAOImpl implements CategoryDAO {
 	
-	private static final String GET_TOTAL = "select count(*) from Category";
+	private static final String GET_TOTAL = "select count(*) from category";
 	private static final String ADD_STMT = "insert into category values(CATEGORYID_SEQ.nextval,?)";
 	private static final String UPATE_STMT = "update category set name= ? where categoryid = ?";
-	private static final String DEL_STMT = "delete from Category where categoryid = ? ";
-	private static final String GET_ONE = "select * from Category where categoryid = ?";
-	private static final String GET_ALL = "select * from Category order by rownum desc ";
+	private static final String DEL_STMT = "delete from category where categoryid = ? ";
+	private static final String GET_ONE = "select * from category where categoryid = ?";
+	private static final String GET_ALL = "select * from category order by rownum desc ";
 	@Override
 	public int getTotal() {
         int total = 0;

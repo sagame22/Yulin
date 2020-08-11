@@ -27,7 +27,7 @@
 								</span>
 						    </a>
 							<span class="productPrice">
-								<fmt:formatNumber type="number" value="${p.promotePrice}" minFractionDigits="2"/>
+								<fmt:formatNumber type="number" value="${p.promotePrice}" />元
 							</span>
 						</div>
 					</c:if>				

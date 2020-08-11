@@ -6,15 +6,20 @@
 function showProductsAsideCategorys(cid){
 	$("div.eachCategory[cid="+cid+"]").css("background-color","rgba(55,55,55,0.8)");
 	$("div.eachCategory[cid="+cid+"] a").css("color","#87CEFA");
-	$("div.productsAsideCategorys[cid="+cid+"]").show("slow");
+	$("div.productsAsideCategorys[cid="+cid+"]").slideDown("1000");
 }
-
+function showProductsAsideCategorys2(cid){
+	$("div.eachCategory[cid="+cid+"]").css("background-color","rgba(55,55,55,0.8)");
+	$("div.eachCategory[cid="+cid+"] a").css("color","#87CEFA");
+	$("div.productsAsideCategorys[cid="+cid+"]").show();
+}
 
 function hideProductsAsideCategorys(cid){
 	$("div.eachCategory[cid="+cid+"]").css("background-color","rgb(15, 15, 15)");
 	$("div.eachCategory[cid="+cid+"] a").css("color","#999999");
 	$("div.productsAsideCategorys[cid="+cid+"]").hide();
 }
+
 $(function(){
     $("div.eachCategory").mouseenter(function(){
         var cid = $(this).attr("cid");
@@ -26,7 +31,7 @@ $(function(){
     });
     $("div.productsAsideCategorys").mouseenter(function(){
     	var cid = $(this).attr("cid");
-    	showProductsAsideCategorys(cid);
+    	showProductsAsideCategorys2(cid);
     });
     $("div.productsAsideCategorys").mouseleave(function(){
     	var cid = $(this).attr("cid");
@@ -65,7 +70,7 @@ $(function(){
 	
 		<c:forEach items="${cs}" var="c">
 			<div cid="${c.categoryId}" class="eachCategory">
-				<span class="glyphicon glyphicon-link"></span>
+				
 				<a href="forecategory?cid=${c.categoryId}">
 					${c.name}
 				</a>

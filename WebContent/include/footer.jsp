@@ -24,7 +24,7 @@
 			    <a href="#nowhere" >缺貨規則</a>
 			</div>
             <div class="descColumn">
-			    <span class="descColumnTitle">支付方式</span>
+			    <span class="descColumnTitle">付款方式</span>
 			    <a href="#nowhere" >線上支付</a> 
 			    <a href="#nowhere" >信用卡</a> 
 			    <a href="#nowhere" >匯款</a>

@@ -8,7 +8,6 @@ package com.member.model;
 	    public int getMemberId() {
 	        return memberId;
 	    }
-	 
 	    public void setMemberId(int id) {
 	        this.memberId = id;
 	    }

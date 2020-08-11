@@ -57,16 +57,16 @@ $(function(){
 			<td></td>
 		</tr>
 		<tr>
-			<td class="registerTableLeftTD">登陸名稱</td>
+			<td class="registerTableLeftTD">登入名稱</td>
 			<td  class="registerTableRightTD"><input id="name" name="name" placeholder="會員名稱設置成功無法更改" > </td>
 		</tr>
 		<tr>
-			<td  class="registerTip registerTableLeftTD">設置登陸密碼</td>
-			<td  class="registerTableRightTD">登陸時驗證</td>
+			<td  class="registerTip registerTableLeftTD">設置登入密碼</td>
+			<td  class="registerTableRightTD">登入時驗證</td>
 		</tr>		
 		<tr>
-			<td class="registerTableLeftTD">登陸密碼</td>
-			<td class="registerTableRightTD"><input id="password" name="password" type="password"  placeholder="設置你的登錄密碼" > </td>
+			<td class="registerTableLeftTD">登入密碼</td>
+			<td class="registerTableRightTD"><input id="password" name="password" type="password"  placeholder="設置你的登入密碼" > </td>
 		</tr>
 		<tr>
 			<td class="registerTableLeftTD">密碼確認</td>

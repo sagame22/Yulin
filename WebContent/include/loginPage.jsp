@@ -25,8 +25,7 @@ $(function(){
 	
 	
 	
-	var left = window.innerWidth/2+162;
-	$("div.loginSmallDiv").css("left",left);
+	
 })
 </script>
 
@@ -49,12 +48,12 @@ $(function(){
 				</div>
 			</div>
 				
-			<div class="login_acount_text">會員登錄</div>
+			<div class="login_acount_text">會員登入</div>
 			<div class="loginInput " >
 				<span class="loginInputIcon ">
 					<span class=" glyphicon glyphicon-user"></span>
 				</span>
-				<input id="name" name="name" placeholder="手機/會員名/郵箱" type="text">			
+				<input id="name" name="name" placeholder="會員名稱/郵箱" type="text">			
 			</div>
 			
 			<div class="loginInput " >
@@ -67,11 +66,11 @@ $(function(){
 			
 			
 			<div>
-				<a class="notImplementLink" href="#nowhere">忘記登錄密碼</a> 
-				<a href="register.jsp" class="pull-right">免費註冊</a> 
+				<a Style="color:black;" class="notImplementLink" href="#nowhere">忘記密碼</a> 
+				<a Style="color:black;" href="register.jsp" class="pull-right">免費註冊</a> 
 			</div>
 			<div style="margin-top:20px">
-				<button class="btn btn-block redButton" type="submit">登錄</button>
+				<button class="btn btn-block " type="submit">登入</button>
 			</div>
 		</div>	
 	</form>

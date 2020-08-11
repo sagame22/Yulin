@@ -125,8 +125,8 @@ $(function(){
 						</td>
 						<td  class="orderItemProductInfoPartTD" width="100px">
 						
-							<div class="orderListItemProductOriginalPrice">NT$<fmt:formatNumber type="number" value="${oi.product.orignalPrice}" minFractionDigits="2"/></div>
-							<div class="orderListItemProductPrice">NT$<fmt:formatNumber type="number" value="${oi.product.promotePrice}" minFractionDigits="2"/></div>
+							<div class="orderListItemProductOriginalPrice">NT$<fmt:formatNumber type="number" value="${oi.product.orignalPrice}"/>元</div>
+							<div class="orderListItemProductPrice">NT$<fmt:formatNumber type="number" value="${oi.product.promotePrice}"/>元</div>
 		
 		
 						</td>
@@ -136,7 +136,7 @@ $(function(){
 								<span class="orderListItemNumber">${o.totalNumber}</span>
 							</td>
 							<td valign="top" rowspan="${fn:length(o.orderItems)}" width="120px" class="orderListItemProductRealPriceTD orderItemOrderInfoPartTD">
-								<div class="orderListItemProductRealPrice">NT$<fmt:formatNumber  minFractionDigits="2"  maxFractionDigits="2" type="number" value="${o.total}"/></div>
+								<div class="orderListItemProductRealPrice">NT$<fmt:formatNumber  maxFractionDigits="2" type="number" value="${o.total}"/>元</div>
 								<div class="orderListItemPriceWithTransport">(含運：NT$0.00)</div>
 							</td>
 							<td valign="top" rowspan="${fn:length(o.orderItems)}" class="orderListItemButtonTD orderItemOrderInfoPartTD" width="100px">
